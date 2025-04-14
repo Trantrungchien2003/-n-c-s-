@@ -1,3 +1,16 @@
-components: []
+components:
+- components:
+  - layout_properties: {grid_position: 'IWDFAV,PBQKGG'}
+    name: welcome_label
+    properties: {align: center, text: Chào mừng bạn!}
+    type: Label
+  - layout_properties: {grid_position: 'INYRTY,WVBZKP'}
+    name: logout_button
+    properties: {text: Đăng xuất}
+    type: Button
+  layout_properties: {grid_position: 'QGQJTB,ORRDOG'}
+  name: card_1
+  properties: {role: card}
+  type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true

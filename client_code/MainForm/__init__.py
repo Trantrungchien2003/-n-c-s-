@@ -1,14 +1,25 @@
 from ._anvil_designer import MainFormTemplate
 from anvil import *
 import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-
 
 class MainForm(MainFormTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
+    # Khởi tạo form
     self.init_components(**properties)
+    
+    # Đảm bảo các thành phần hiển thị
+    self.welcome_label.visible = True
+    self.logout_button.visible = True
+    
+    # Kiểm tra trạng thái đăng nhập
+    user = anvil.users.get_user()
+    if user:
+      self.welcome_label.text = f"Chào mừng {user['email']}!"
+    else:
+      open_form('LoginForm')
 
-    # Any code you write here will run before the form opens.
+  def logout_button_click(self, **event_args):
+    """Xử lý đăng xuất"""
+    anvil.users.logout()
+    alert("Bạn đã đăng xuất!")
+    open_form('LoginForm')

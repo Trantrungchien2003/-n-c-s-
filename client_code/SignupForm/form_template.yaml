@@ -1,23 +1,36 @@
 components:
 - components:
-  - layout_properties: {}
+  - layout_properties: {grid_position: 'ISMUVZ,ZPETDR'}
+    name: headline_1
+    properties: {align: center, bold: true, font: 'Time ', font_size: 32, role: headline, text: Đăng Ký}
+    type: Label
+  - layout_properties: {grid_position: 'YSKNRQ,AIAUXQ'}
     name: email_textbox
     properties: {align: left, text: 'Email:'}
     type: TextBox
-  data_bindings:
-  - {code: 'self.item['''']', property: spacing, writeback: false}
-  layout_properties: {grid_position: 'WKRSHW,EFTPHY'}
-  name: flow_panel_1
-  properties: {align: left}
-  type: FlowPanel
-- data_bindings: []
-  layout_properties: {grid_position: 'IIGUWP,TSVQKJ'}
-  name: password_textbox
-  properties: {bold: false, italic: false, text: 'Mật Khẩu:', type: text, visible: true}
-  type: TextBox
-- layout_properties: {grid_position: 'YLHWEY,ANMHTJ'}
-  name: confirm_password_textbox
-  properties: {text: 'Xác Nhận Mật Khẩu:', visible: true}
-  type: TextBox
+  - data_bindings: []
+    layout_properties: {grid_position: 'IRZULA,GJHALG'}
+    name: password_textbox
+    properties: {bold: false, italic: false, text: 'Mật Khẩu:', type: text, visible: true}
+    type: TextBox
+  - layout_properties: {grid_position: 'TRBEHK,PHTYQY'}
+    name: confirm_password_textbox
+    properties: {text: 'Xác Nhận Mật Khẩu:', visible: true}
+    type: TextBox
+  - event_bindings: {click: signup_button_click}
+    layout_properties: {grid_position: 'YHBXKW,SCCIGI'}
+    name: signup_button
+    properties: {text: Đăng Ký}
+    type: Button
+  - event_bindings: {click: login_link_click}
+    layout_properties: {grid_position: 'FFWRSS,ORZRXL'}
+    name: login_link
+    properties: {text: 'Đã có tài khoản? Đăng nhập'}
+    type: Link
+  layout_properties: {grid_position: 'DPTUPM,JGIOEH'}
+  name: card_1
+  properties: {role: card}
+  type: ColumnPanel
 container: {type: ColumnPanel}
+custom_component: false
 is_package: true
