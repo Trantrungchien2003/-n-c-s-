@@ -16,6 +16,7 @@ class MainForm(MainFormTemplate):
     if user:
       self.welcome_label.text = f"Chào mừng {user['email']}!"
     else:
+      alert("Vui lòng đăng nhập trước!")
       open_form('LoginForm')
 
   def logout_button_click(self, **event_args):

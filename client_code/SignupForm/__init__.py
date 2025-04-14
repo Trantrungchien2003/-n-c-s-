@@ -23,7 +23,7 @@ class SignupForm(SignupFormTemplate):
   def signup_button_click(self, **event_args):
     """Xử lý khi nhấn nút Đăng ký"""
     # Lấy dữ liệu từ các ô nhập
-    email = self.email_textbox.text.strip()  # Loại bỏ khoảng trắng
+    email = self.email_textbox.text.strip()
     password = self.password_textbox.text.strip()
     confirm_password = self.confirm_password_textbox.text.strip()
 
@@ -36,7 +36,6 @@ class SignupForm(SignupFormTemplate):
       alert("Mật khẩu không khớp!")
       return
 
-    # Kiểm tra định dạng email cơ bản
     if '@' not in email or '.' not in email:
       alert("Email không hợp lệ!")
       return
@@ -45,13 +44,6 @@ class SignupForm(SignupFormTemplate):
       # Đăng ký người dùng
       user = anvil.users.signup_with_email(email, password, allow_remembered=True)
       if user:
-        # Đảm bảo tài khoản được lưu vào bảng Users
-        users_table = app_tables.users
-        new_user = users_table.add_row(
-          email=email,
-          password_hash=user['password_hash'],  # Lấy password_hash từ user
-          confirmed_email=user['confirmed_email']
-        )
         alert("Đăng ký thành công! Vui lòng đăng nhập.")
         open_form('LoginForm')
       else:
