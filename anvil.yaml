@@ -1,5 +1,44 @@
 allow_embedding: false
 db_schema:
+  rentals:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: title
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: address
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: price
+      type: number
+    - admin_ui: {order: 3, width: 200}
+      name: area
+      type: number
+    - admin_ui: {order: 4, width: 200}
+      name: description
+      type: string
+    - admin_ui: {order: 5, width: 200}
+      name: room_type
+      type: string
+    - admin_ui: {order: 6, width: 200}
+      name: status
+      type: string
+    - admin_ui: {order: 7, width: 200}
+      name: contact
+      type: string
+    - admin_ui: {order: 8, width: 200}
+      name: image
+      type: media
+    - admin_ui: {order: 9, width: 200}
+      name: created_at
+      type: datetime
+    - admin_ui: {order: 10, width: 200}
+      name: posted_by
+      target: users
+      type: link_single
+    server: full
+    title: Rentals
   users:
     client: none
     columns:
@@ -39,7 +78,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_signup: false, confirm_email: false, enable_automatically: false, require_secure_passwords: true, use_email: true, use_google: false}
+- client_config: {allow_signup: true, confirm_email: false, enable_automatically: true, require_secure_passwords: true, use_email: true, use_google: false}
   server_config: {user_table: users}
   source: /runtime/services/anvil/users.yml
 - client_config: {}

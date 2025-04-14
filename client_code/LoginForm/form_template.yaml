@@ -2,17 +2,30 @@ components:
 - components:
   - layout_properties: {grid_position: 'VTSXCM,HLVBXS'}
     name: headline_1
-    properties: {align: center, role: headline, text: Đăng Nhập}
+    properties: {align: center, bold: true, font: 'time ', font_size: 32, icon: '', italic: false, role: headline, text: Đăng Nhập}
+    type: Label
+  - layout_properties: {grid_position: 'PDJJEL,YZITXD'}
+    name: label_1
+    properties: {text: 'Email:'}
     type: Label
   - layout_properties: {grid_position: 'PDJJEL,SQBZIY'}
     name: email_textbox
-    properties: {text: 'Email:'}
+    properties: {text: ''}
     type: TextBox
+  - layout_properties: {grid_position: 'IZQRWK,XLBGEL'}
+    name: label_2
+    properties: {text: Mật Khẩu}
+    type: Label
   - event_bindings: {pressed_enter: password_textbox_pressed_enter}
     layout_properties: {grid_position: 'IZQRWK,FDLXFQ'}
     name: password_textbox
-    properties: {text: 'Mật khẩu:'}
+    properties: {text: ''}
     type: TextBox
+  - data_bindings: []
+    layout_properties: {grid_position: 'IZQRWK,HCSNBB'}
+    name: remember_me_checkbox
+    properties: {checked: false, text: Ghi nhớ đăng nhập}
+    type: CheckBox
   - event_bindings: {click: login_button_click}
     layout_properties: {grid_position: 'VWPFZQ,BJOIGM'}
     name: login_button
@@ -25,7 +38,7 @@ components:
     type: Link
   layout_properties: {grid_position: 'HHFLAC,GQDNMG'}
   name: card_1
-  properties: {role: card}
+  properties: {col_widths: '{"YZITXD":5,"SQBZIY":55,"XLBGEL":5,"FDLXFQ":55,"BJOIGM":45}', role: card}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true

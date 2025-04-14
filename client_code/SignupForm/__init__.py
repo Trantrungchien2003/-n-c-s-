@@ -6,43 +6,52 @@ import anvil.tables.query as q
 
 class SignupForm(SignupFormTemplate):
   def __init__(self, **properties):
-    # Khởi tạo form
     self.init_components(**properties)
-    
-    # Đặt type thành password cho các ô mật khẩu
     self.password_textbox.type = 'password'
     self.confirm_password_textbox.type = 'password'
-    
-    # Đảm bảo các thành phần hiển thị
     self.email_textbox.visible = True
     self.password_textbox.visible = True
     self.confirm_password_textbox.visible = True
     self.signup_button.visible = True
     self.login_link.visible = True
 
-  def signup_button_click(self, **event_args):
-    """Xử lý khi nhấn nút Đăng ký"""
-    # Lấy dữ liệu từ các ô nhập
-    email = self.email_textbox.text.strip()
-    password = self.password_textbox.text.strip()
-    confirm_password = self.confirm_password_textbox.text.strip()
+    # Xóa giá trị mặc định (nếu có)
+    self.password_textbox.text = ''
+    self.confirm_password_textbox.text = ''
 
-    # Kiểm tra dữ liệu đầu vào
+  def signup_button_click(self, **event_args):
+    # Lấy dữ liệu và loại bỏ ký tự không mong muốn
+    email = self.email_textbox.text.strip()
+    password = self.password_textbox.text.strip().replace('\n', '').replace('\r', '')
+    confirm_password = self.confirm_password_textbox.text.strip().replace('\n', '').replace('\r', '')
+
+    # In giá trị để debug
+    print(f"Password: '{password}'")
+    print(f"Confirm Password: '{confirm_password}'")
+
+    # Kiểm tra đầy đủ thông tin
     if not email or not password or not confirm_password:
       alert("Vui lòng điền đầy đủ thông tin!")
       return
-    
+
+    # Kiểm tra mật khẩu khớp
     if password != confirm_password:
-      alert("Mật khẩu không khớp!")
+      alert(f"Mật khẩu và Xác nhận mật khẩu không khớp!\nMật khẩu: '{password}'\nXác nhận mật khẩu: '{confirm_password}'\n\nVui lòng nhập lại giống với mật khẩu.")
       return
 
+    # Kiểm tra độ dài mật khẩu
+    if len(password) < 6:
+      alert("Mật khẩu phải có ít nhất 6 ký tự!")
+      return
+
+    # Kiểm tra định dạng email
     if '@' not in email or '.' not in email:
       alert("Email không hợp lệ!")
       return
 
     try:
-      # Đăng ký người dùng
-      user = anvil.users.signup_with_email(email, password, allow_remembered=True)
+      # Sửa lại: Xóa tham số allow_remembered
+      user = anvil.users.signup_with_email(email, password)
       if user:
         alert("Đăng ký thành công! Vui lòng đăng nhập.")
         open_form('LoginForm')
@@ -54,17 +63,13 @@ class SignupForm(SignupFormTemplate):
       alert(f"Lỗi đăng ký: {str(e)}")
 
   def login_link_click(self, **event_args):
-    """Chuyển sang form đăng nhập"""
     open_form('LoginForm')
 
   def email_textbox_pressed_enter(self, **event_args):
-    """Xử lý khi nhấn Enter trong ô email"""
     self.signup_button_click()
 
   def password_textbox_pressed_enter(self, **event_args):
-    """Xử lý khi nhấn Enter trong ô mật khẩu"""
     self.signup_button_click()
 
   def confirm_password_textbox_pressed_enter(self, **event_args):
-    """Xử lý khi nhấn Enter trong ô xác nhận mật khẩu"""
     self.signup_button_click()
