@@ -2,11 +2,11 @@ components:
 - components:
   - layout_properties: {grid_position: 'VTSXCM,HLVBXS'}
     name: headline_1
-    properties: {align: center, bold: true, font: 'time ', font_size: 32, icon: '', italic: false, role: headline, text: Đăng Nhập}
+    properties: {align: center, background: '', bold: true, font: 'time ', font_size: 32, icon: '', italic: false, role: headline, text: Đăng Nhập}
     type: Label
   - layout_properties: {grid_position: 'PDJJEL,YZITXD'}
     name: label_1
-    properties: {text: 'Email:'}
+    properties: {align: left, bold: true, text: 'Email:'}
     type: Label
   - layout_properties: {grid_position: 'PDJJEL,SQBZIY'}
     name: email_textbox
@@ -15,7 +15,7 @@ components:
   - data_bindings: []
     layout_properties: {grid_position: 'IZQRWK,XLBGEL'}
     name: label_2
-    properties: {text: 'Mật Khẩu:'}
+    properties: {align: left, bold: true, text: 'Mật Khẩu:'}
     type: Label
   - event_bindings: {pressed_enter: password_textbox_pressed_enter}
     layout_properties: {grid_position: 'IZQRWK,FDLXFQ'}
@@ -30,7 +30,7 @@ components:
   - event_bindings: {click: login_button_click}
     layout_properties: {grid_position: 'VWPFZQ,BJOIGM'}
     name: login_button
-    properties: {text: Đăng nhập}
+    properties: {background: 'theme:Primary 500', bold: true, font_size: 15, foreground: 'theme:Gray 900', icon: '', italic: false, text: Đăng nhập, underline: false}
     type: Button
   - event_bindings: {click: signup_link_click}
     layout_properties: {grid_position: 'QGKKAH,TLKGKT'}
@@ -41,5 +41,7 @@ components:
   name: card_1
   properties: {col_widths: '{"YZITXD":5,"SQBZIY":55,"XLBGEL":5,"FDLXFQ":55,"BJOIGM":45,"HCSNBB":20}', role: card}
   type: ColumnPanel
-container: {type: ColumnPanel}
+container:
+  properties: {col_widths: '{"FBZHWJ":60}'}
+  type: ColumnPanel
 is_package: true
