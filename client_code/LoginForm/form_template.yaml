@@ -12,9 +12,10 @@ components:
     name: email_textbox
     properties: {text: ''}
     type: TextBox
-  - layout_properties: {grid_position: 'IZQRWK,XLBGEL'}
+  - data_bindings: []
+    layout_properties: {grid_position: 'IZQRWK,XLBGEL'}
     name: label_2
-    properties: {text: Mật Khẩu}
+    properties: {text: 'Mật Khẩu:'}
     type: Label
   - event_bindings: {pressed_enter: password_textbox_pressed_enter}
     layout_properties: {grid_position: 'IZQRWK,FDLXFQ'}
@@ -38,7 +39,11 @@ components:
     type: Link
   layout_properties: {grid_position: 'HHFLAC,GQDNMG'}
   name: card_1
-  properties: {col_widths: '{"YZITXD":5,"SQBZIY":55,"XLBGEL":5,"FDLXFQ":55,"BJOIGM":45}', role: card}
+  properties: {col_widths: '{"YZITXD":5,"SQBZIY":55,"XLBGEL":5,"FDLXFQ":55,"BJOIGM":45,"HCSNBB":20}', role: card}
   type: ColumnPanel
+- layout_properties: {grid_position: 'FSJPGL,WQCSWM'}
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
 container: {type: ColumnPanel}
 is_package: true
