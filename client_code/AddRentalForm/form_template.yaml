@@ -1,0 +1,93 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'DLZSTJ,VZUBJT KKCYKX,DXBIVO'}
+    name: label_1
+    properties: {text: Tên địa điểm}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,VZUBJT RBGDNE,CXIDUR'}
+    name: label_2
+    properties: {text: Địa chỉ}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,VZUBJT EPRTYF,ITAAIF'}
+    name: label_3
+    properties: {text: Giá thuê (VNĐ/tháng)}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,VZUBJT QLJMPB,AHQQIC'}
+    name: label_5
+    properties: {text: Mô tả}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB YVEREB,WCSFJA'}
+    name: title_textbox
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB TDCYJM,XTMQDT'}
+    name: address_textbox
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB YOWWQZ,YGWGDX'}
+    name: price_textbox
+    properties:
+      margin: ['2', null, '2', null]
+    type: TextBox
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB TZVGJV,LOUFHE'}
+    name: description_textarea
+    properties: {height: 47.199981689453125}
+    type: TextArea
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB BECXGP,UZWZKW'}
+    name: label_6
+    properties: {text: Loại phòng}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB BECXGP,IUPFCF'}
+    name: room_type_dropdown
+    properties: {}
+    type: DropDown
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB YOMMMG,TFCAAU'}
+    name: label_4
+    properties: {text: Diện tích (m²)}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB YOMMMG,HVXMFY'}
+    name: area_textbox
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB WVADEA,JOZVOC'}
+    name: label_7
+    properties: {text: Tình trạng}
+    type: Label
+  - layout_properties: {grid_position: 'DLZSTJ,YNSCMB WVADEA,QWHYEA'}
+    name: status_dropdown
+    properties:
+      include_placeholder: false
+      items: []
+    type: DropDown
+  - layout_properties: {grid_position: 'OTQZWO,KTAZSZ'}
+    name: label_8
+    properties: {text: Số điện thoại liên hệ}
+    type: Label
+  - layout_properties: {grid_position: 'OTQZWO,AORGEK'}
+    name: contact_textbox
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'MBLYEG,EIGROQ'}
+    name: label_9
+    properties: {text: Hình ảnh (tùy chọn)}
+    type: Label
+  - layout_properties: {grid_position: 'MBLYEG,LNHIWS'}
+    name: image_loader
+    properties: {}
+    type: FileLoader
+  - layout_properties: {grid_position: 'HXXAWO,AGYXPK'}
+    name: submit_button
+    properties: {text: Đăng địa điểm}
+    type: Button
+  - layout_properties: {grid_position: 'ZNRNZB,HNLLVR'}
+    name: back_link
+    properties: {text: Quay lại}
+    type: Link
+  layout_properties: {grid_position: 'MPCTRW,GQNTKL'}
+  name: card_1
+  properties: {col_widths: '{"VZUBJT":10,"YNSCMB":50,"TFCAAU":10,"HVXMFY":50,"UZWZKW":10,"IUPFCF":50,"JOZVOC":10,"QWHYEA":50,"KTAZSZ":10,"AORGEK":50,"EIGROQ":10,"LNHIWS":50}', role: card}
+  type: ColumnPanel
+container:
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
+is_package: true

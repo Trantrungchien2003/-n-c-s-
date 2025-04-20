@@ -2,6 +2,7 @@
 from ._anvil_designer import LoginFormTemplate
 # Nhập các thành phần giao diện từ Anvil
 from anvil import *
+import anvil.server
 # Nhập module quản lý người dùng của Anvil
 import anvil.users
 

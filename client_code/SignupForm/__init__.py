@@ -2,6 +2,7 @@
 from ._anvil_designer import SignupFormTemplate
 # Nhập các thành phần giao diện từ Anvil
 from anvil import *
+import anvil.server
 # Nhập module quản lý người dùng của Anvil
 import anvil.users
 # Nhập module để làm việc với bảng dữ liệu
