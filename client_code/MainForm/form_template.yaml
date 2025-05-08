@@ -12,15 +12,15 @@ components:
     name: logout_button
     properties: {text: Đăng xuất}
     type: Button
-  - layout_properties: {grid_position: 'DLYHWP,ZUZBZZ'}
+  - components:
+    - data_bindings: []
+      name: no_rentals_label
+      properties: {text: Bạn chưa đăng địa điểm nào, visible: true}
+      type: Label
+    layout_properties: {grid_position: 'RVCWKZ,WUTINW'}
     name: rentals_container
     properties: {spacing_above: medium, spacing_below: medium}
     type: FlowPanel
-  - data_bindings: []
-    layout_properties: {grid_position: 'XHMSWX,KTPJYL'}
-    name: no_rentals_label
-    properties: {text: Bạn chưa đăng địa điểm nào, visible: true}
-    type: Label
   layout_properties: {grid_position: 'QGQJTB,ORRDOG'}
   name: card_1
   properties: {role: card}

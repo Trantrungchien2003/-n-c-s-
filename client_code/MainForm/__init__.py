@@ -18,7 +18,7 @@ class MainForm(MainFormTemplate):
     user = anvil.users.get_user()
     if user:
       self.welcome_label.text = f"Chào mừng {user['email']}!"
-      self.refresh_rentals()
+      self.refresh_rentals()  # Gọi hàm refresh_rentals
     else:
       alert("Vui lòng đăng nhập trước!")
       open_form('LoginForm')
