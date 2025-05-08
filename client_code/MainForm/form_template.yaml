@@ -12,16 +12,16 @@ components:
     name: logout_button
     properties: {text: Đăng xuất}
     type: Button
+  - layout_properties: {grid_position: 'RUOLYS,DILUMM'}
+    name: rentals_panel
+    properties: {item_template: MainForm.ItemTemplate1}
+    type: RepeatingPanel
   - components:
-    - layout_properties: {grid_position: 'UERYAE,NSQRZH'}
-      name: rentals_panel
-      properties: {item_template: MainForm.ItemTemplate1}
-      type: RepeatingPanel
     - layout_properties: {grid_position: 'DTTSHQ,XPKROY'}
       name: no_rentals_label
-      properties: {text: Bạn chưa đăng địa điểm nào, visible: false}
+      properties: {text: Bạn chưa đăng địa điểm nào, visible: true}
       type: Label
-    layout_properties: {grid_position: 'RZMGAI,YDWZAE'}
+    layout_properties: {grid_position: 'ZLAJQC,RRFUQQ'}
     name: card_2
     properties: {role: card}
     type: ColumnPanel
