@@ -793,7 +793,18 @@ textarea.anvil-component[disabled] {
 .checkbox, .radio {
   font-size: 16px;
 }
-
+.anvil-panel-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.anvil-image {
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+}
 /* Shadow values taken from 
 https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-material-design-elevations
 */
