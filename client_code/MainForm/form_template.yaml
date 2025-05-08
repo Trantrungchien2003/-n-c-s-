@@ -1,10 +1,10 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'IWDFAV,PBQKGG'}
+  - layout_properties: {grid_position: 'JONJTM,ZQQAIR'}
     name: welcome_label
     properties: {align: center, text: Chào mừng bạn!}
     type: Label
-  - layout_properties: {grid_position: 'NOIDWD,TMBOMU'}
+  - layout_properties: {grid_position: 'ZXNVML,PZSSTL'}
     name: add_rental_button
     properties: {text: Đăng địa điểm mới}
     type: Button
@@ -13,17 +13,21 @@ components:
     properties: {text: Đăng xuất}
     type: Button
   - components:
-    - data_bindings: []
+    - layout_properties: {grid_position: 'UERYAE,NSQRZH'}
+      name: rentals_panel
+      properties: {item_template: MainForm.ItemTemplate1}
+      type: RepeatingPanel
+    - layout_properties: {grid_position: 'DTTSHQ,XPKROY'}
       name: no_rentals_label
-      properties: {text: Bạn chưa đăng địa điểm nào, visible: true}
+      properties: {text: Bạn chưa đăng địa điểm nào, visible: false}
       type: Label
-    layout_properties: {grid_position: 'RVCWKZ,WUTINW'}
-    name: rentals_container
-    properties: {spacing_above: medium, spacing_below: medium}
-    type: FlowPanel
-  layout_properties: {grid_position: 'QGQJTB,ORRDOG'}
+    layout_properties: {grid_position: 'RZMGAI,YDWZAE'}
+    name: card_2
+    properties: {role: card}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'JBLSYV,BNHGNY'}
   name: card_1
-  properties: {role: card}
+  properties: {role: card, spacing_above: medium, spacing_below: medium}
   type: ColumnPanel
 container:
   properties: {spacing_above: medium, spacing_below: medium}

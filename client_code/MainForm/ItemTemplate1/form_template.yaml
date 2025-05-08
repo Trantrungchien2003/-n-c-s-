@@ -1,0 +1,49 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''title'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'DMBRFW,OYYYKN'}
+  name: title_label
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''address'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'KHJEPR,OZNTDY'}
+  name: label_2
+  properties: {text: 'Địa chỉ: '}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''price''] ', property: text, writeback: false}
+  layout_properties: {grid_position: 'GJOIWZ,ALJNCX'}
+  name: label_1
+  properties: {text: 'Giá: VNĐ/tháng'}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''area'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'PFHTQL,MUWLNR'}
+  name: label_3
+  properties: {text: 'Diện tích: '}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''room_type'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'AZQTUT,OXQQIX'}
+  name: label_4
+  properties: {text: 'Loại phòng: '}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''status'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'WGYTWZ,CGHKLY'}
+  name: label_5
+  properties: {text: 'Trạng thái: {'}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''contact'']', property: text, writeback: false}
+  layout_properties: {grid_position: 'MHPHCY,ZXPWUB'}
+  name: label_6
+  properties: {text: 'Liên hệ: {'}
+  type: Label
+- layout_properties: {grid_position: 'DYSPYC,NIGECP'}
+  name: rental_image
+  properties: {source: 'self.item[''image'']'}
+  type: Image
+container: {type: ColumnPanel}
+is_package: true
