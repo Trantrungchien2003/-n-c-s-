@@ -1,8 +1,7 @@
 from ._anvil_designer import MainFormTemplate
 from anvil import *
 import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
+from anvil.tables import app_tables  # Nhập app_tables để truy cập bảng
 
 class MainForm(MainFormTemplate):
   def __init__(self, **properties):
@@ -20,8 +19,11 @@ class MainForm(MainFormTemplate):
     user = anvil.users.get_user()
     if user:
       self.welcome_label.text = f"Chào mừng {user['email']}!"
-      # Lấy danh sách địa điểm do người dùng đăng
-      rentals = tables.rentals.search(posted_by=user, sort=[("created_at", False)])
+      # Lấy danh sách địa điểm do người dùng đăng, sắp xếp theo created_at (mới nhất trước)
+      rentals = app_tables.rentals.search(
+        posted_by=user,
+        order_by=["-created_at"]  # Sắp xếp giảm dần theo created_at
+      )
       # Cập nhật danh sách vào Repeating Panel
       self.rentals_panel.items = rentals
       # Kiểm tra số lượng địa điểm
