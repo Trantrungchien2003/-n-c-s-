@@ -1,3 +1,49 @@
-components: []
+components:
+- components:
+  - components:
+    - layout_properties: {grid_position: 'YQPKQJ,EUOMZW'}
+      name: title_label
+      properties: {text: '[Tieu de]'}
+      type: Label
+    - layout_properties: {grid_position: 'ZWTEXS,OXIJPT'}
+      name: address_label
+      properties: {text: Địa Chỉ}
+      type: Label
+    - layout_properties: {grid_position: 'HNDJJY,RJLQRW'}
+      name: price_label
+      properties: {text: Giá}
+      type: Label
+    - layout_properties: {grid_position: 'TGRGYX,SZCDEX'}
+      name: area_label
+      properties: {text: Diện tích}
+      type: Label
+    - layout_properties: {grid_position: 'URSZEX,LKBBZZ'}
+      name: room_type_label
+      properties: {text: Loại Phòng}
+      type: Label
+    - layout_properties: {grid_position: 'HAKXDO,XSPWNX'}
+      name: contact_label
+      properties: {text: Liên hệ}
+      type: Label
+    - layout_properties: {grid_position: 'LWXVEY,HOAWRC'}
+      name: status_label
+      properties: {}
+      type: Label
+    - layout_properties: {grid_position: 'ODVZEC,XISRXE'}
+      name: description_label
+      properties: {text: Mô tả}
+      type: Label
+    layout_properties: {grid_position: 'OZQFFM,AIDYAV'}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'BOJBUG,VQGUFT'}
+  name: card_1
+  properties: {role: card}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'ALJEAX,XWKXSZ'}
+  name: image_label
+  properties: {}
+  type: Image
 container: {type: ColumnPanel}
 is_package: true

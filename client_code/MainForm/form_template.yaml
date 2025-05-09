@@ -22,6 +22,10 @@ components:
   name: rentals_panel
   properties: {item_template: MainForm.ItemTemplate1}
   type: RepeatingPanel
+- layout_properties: {grid_position: 'IAHSJN,YBPLES'}
+  name: no_rentals_label
+  properties: {}
+  type: Label
 container:
   properties: {spacing_above: medium, spacing_below: medium}
   type: ColumnPanel
