@@ -8,11 +8,9 @@ class MainForm(MainFormTemplate):
     self.welcome_label.text = "Chào mừng!"
     self.add_rental_button.set_event_handler('click', self.add_rental_button_click)
     self.logout_button.set_event_handler('click', self.logout_button_click)
-
-    def add_rental_button_click(self, **event_args):
-      print("Nhấn nút thêm địa điểm")
-      open_form('AddRentalForm')
-
+  def add_rental_button_click(self, **event_args):
+    print("Nhấn nút thêm địa điểm")
+    open_form('AddRentalForm')
   def logout_button_click(self, **event_args):
     print("Nhấn nút đăng xuất")
     anvil.users.logout()

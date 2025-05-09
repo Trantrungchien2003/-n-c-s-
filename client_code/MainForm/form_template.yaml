@@ -9,7 +9,8 @@ components:
     name: add_rental_button
     properties: {text: ĐĂNG ĐIỂM MỚI, visible: true}
     type: Button
-  - layout_properties: {grid_position: 'GDAWEZ,KYACII'}
+  - event_bindings: {click: logout_button_click}
+    layout_properties: {grid_position: 'GDAWEZ,KYACII'}
     name: logout_button
     properties: {text: Đăng Xuất}
     type: Button
@@ -17,6 +18,10 @@ components:
   name: column_panel_1
   properties: {}
   type: ColumnPanel
+- layout_properties: {grid_position: 'OTXEFQ,ESHMJH'}
+  name: rentals_panel
+  properties: {item_template: MainForm.ItemTemplate1}
+  type: RepeatingPanel
 container:
   properties: {spacing_above: medium, spacing_below: medium}
   type: ColumnPanel
