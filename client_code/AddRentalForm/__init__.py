@@ -6,62 +6,75 @@ from datetime import datetime
 
 class AddRentalForm(AddRentalFormTemplate):
   def __init__(self, **properties):
+    # Khởi tạo giao diện
     self.init_components(**properties)
-    # Đặt trạng thái hiển thị ban đầu
-    self.title_textbox.visible = True
-    self.address_textbox.visible = True
-    self.price_textbox.visible = True
-    self.description_textarea.visible = True
-    self.area_textbox.visible = True
-    self.contact_textbox.visible = True
-    if hasattr(self, 'save_button'):
-      self.save_button.visible = True
-      if hasattr(self, 'back_link'):
-        self.back_link.visible = True
+
+    # Danh sách tùy chọn cho "Loại phòng"
+    self.room_type_dropdown.items = [""]
+
+    # Danh sách tùy chọn cho "Tình trạng"
+    self.status_dropdown.items = ["Đang cho thuê", "Đã cho thuê", "Tạm ngưng", "Khác"]
+
+    # Placeholder cho các trường nhập liệu khác (tùy chọn)
+    self.title_textbox.placeholder = "Nhập tiêu đề địa điểm"
+    self.address_textbox.placeholder = "Nhập địa chỉ"
+    self.price_textbox.placeholder = "Nhập giá (VD: 5000000)"
+    self.area_textbox.placeholder = "Nhập diện tích (m²)"
+    self.description_textarea.placeholder = "Mô tả chi tiết"
+    self.contact_textbox.placeholder = "Số điện thoại liên hệ"
 
     def save_button_click(self, **event_args):
-      print("Nhấn nút lưu")
-      # Lấy dữ liệu từ form
+      # Lấy dữ liệu từ các trường
       title = self.title_textbox.text.strip()
       address = self.address_textbox.text.strip()
       price = self.price_textbox.text.strip()
-      description = self.description_textarea.text.strip()
       area = self.area_textbox.text.strip()
+      description = self.description_textarea.text.strip()
+      room_type = self.room_type_dropdown.selected_value
+      status = self.status_dropdown.selected_value
       contact = self.contact_textbox.text.strip()
+      image = self.image_file_loader.file
 
-      # Kiểm tra đầu vào
-      if not title or not address or not price or not description or not area or not contact:
-        alert("Vui lòng điền đầy đủ tất cả thông tin!")
+      # Kiểm tra dữ liệu bắt buộc
+      if not all([title, address, price, area, room_type, status, contact]):
+        alert("Vui lòng điền đầy đủ thông tin!")
         return
 
+        # Chuyển đổi giá và diện tích thành số
         try:
-          price = float(price)  # Chuyển đổi giá thành số
-          area = float(area)    # Chuyển đổi diện tích thành số
-          user = anvil.users.get_user()
-          if not user:
-            alert("Vui lòng đăng nhập trước!")
-            open_form('LoginForm')
-            return
-
-            # Thêm địa điểm mới vào bảng rentals
-            app_tables.rentals.add_row(
-              posted_by=user,
-              title=title,
-              address=address,
-              price=price,
-              description=description,
-              area=area,
-              contact=contact,
-              created_at=datetime.now()
-            )
-          alert("Thêm địa điểm thành công!")
-          open_form('MainForm')
+          price = float(price.replace(".", ""))
+          area = float(area.replace(".", ""))
         except ValueError:
           alert("Giá và diện tích phải là số hợp lệ!")
-        except Exception as e:
-          print(f"Lỗi khi thêm địa điểm: {str(e)}")
-          alert(f"Lỗi khi thêm địa điểm: {str(e)}")
+          return
 
-  def back_link_click(self, **event_args):
-    print("Nhấn link quay lại")
+      # Kiểm tra người dùng đăng nhập
+      user = anvil.users.get_user()
+      if not user:
+        alert("Vui lòng đăng nhập để thêm địa điểm!")
+        open_form('LoginForm')
+        return
+
+        # Lưu dữ liệu vào bảng rentals
+        try:
+          app_tables.rentals.add_row(
+            title=title,
+            address=address,
+            price=price,
+            area=area,
+            description=description or None,
+            room_type=room_type,
+            status=status,
+            contact=contact,
+            image=image,
+            posted_by=user,
+            created_at=datetime.now()
+          )
+          alert("Địa điểm đã được thêm thành công!")
+          open_form('MainForm')
+        except Exception as e:
+          alert(f"Lỗi khi lưu địa điểm: {str(e)}")
+
+  def cancel_button_click(self, **event_args):
+    # Quay lại MainForm khi hủy
     open_form('MainForm')
