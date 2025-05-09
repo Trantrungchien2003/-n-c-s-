@@ -1,90 +1,86 @@
 from ._anvil_designer import AddRentalFormTemplate
 from anvil import *
-import anvil.server
 import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
+from anvil.tables import app_tables
+from datetime import datetime
 
 class AddRentalForm(AddRentalFormTemplate):
   def __init__(self, **properties):
+    # Khởi tạo các thành phần giao diện
     self.init_components(**properties)
-    # Đảm bảo các thành phần hiển thị
-    self.title_textbox.visible = True
-    self.address_textbox.visible = True
-    self.price_textbox.visible = True
-    self.area_textbox.visible = True
-    self.description_textarea.visible = True
-    self.room_type_dropdown.visible = True
-    self.status_dropdown.visible = True
-    self.contact_textbox.visible = True
-    self.image_loader.visible = True
-    self.submit_button.visible = True
-    self.back_link.visible = True
 
-    # Kiểm tra đăng nhập
-    user = anvil.users.get_user()
-    if not user:
-      alert("Vui lòng đăng nhập trước!")
-      open_form('LoginForm')
+    # Đặt giá trị mặc định hoặc gợi ý
+    self.title_text_box.placeholder = "Nhập tiêu đề địa điểm"
+    self.address_text_box.placeholder = "Nhập địa chỉ"
+    self.price_text_box.placeholder = "Nhập giá (VD: 5000000)"
+    self.area_text_box.placeholder = "Nhập diện tích (m²)"
+    self.description_text_box.placeholder = "Mô tả chi tiết"
+    self.contact_text_box.placeholder = "Số điện thoại liên hệ"
 
-  def submit_button_click(self, **event_args):
-    """Xử lý khi nhấn nút Đăng địa điểm"""
-    # Lấy dữ liệu từ các ô nhập
-    title = self.title_textbox.text.strip()
-    address = self.address_textbox.text.strip()
-    price = self.price_textbox.text.strip()
-    area = self.area_textbox.text.strip()
-    description = self.description_textarea.text.strip()
-    room_type = self.room_type_dropdown.selected_value
-    status = self.status_dropdown.selected_value
-    contact = self.contact_textbox.text.strip()
-    image = self.image_loader.file
+    # Đặt danh sách cho room_type_dropdown
+    self.room_type_dropdown.items = ["Căn hộ", "Nhà riêng", "Phòng trọ", "Văn phòng"]
 
-    # Kiểm tra dữ liệu đầu vào
-    if not all([title, address, price, area, description, room_type, status, contact]):
-      alert("Vui lòng điền đầy đủ thông tin!")
-      return
+    # Đặt trạng thái mặc định cho status_dropdown
+    self.status_dropdown.items = ["Đang cho thuê", "Đã cho thuê", "Tạm ngưng"]
 
-    # Chuyển đổi price và area thành số
-    try:
-      price = int(price)
-      area = float(area)
-    except ValueError:
-      alert("Giá thuê và diện tích phải là số!")
-      return
+    # Debug: In thông tin khởi tạo
+    print("Khởi tạo AddRentalForm")
 
-    # Kiểm tra định dạng số điện thoại (cơ bản)
-    if not contact.isdigit() or len(contact) < 10:
-      alert("Số điện thoại không hợp lệ!")
-      return
+    def save_button_click(self, **event_args):
+      # Lấy dữ liệu từ các trường nhập liệu
+      title = self.title_text_box.text.strip()
+      address = self.address_text_box.text.strip()
+      price = self.price_text_box.text.strip()
+      area = self.area_text_box.text.strip()
+      description = self.description_text_box.text.strip()
+      room_type = self.room_type_dropdown.selected_value
+      status = self.status_dropdown.selected_value
+      contact = self.contact_text_box.text.strip()
+      image = self.image_file_loader.file
 
-    # Lấy thông tin người dùng hiện tại
-    user = anvil.users.get_user()
-    if not user:
-      alert("Vui lòng đăng nhập trước!")
-      open_form('LoginForm')
-      return
+      # Kiểm tra dữ liệu đầu vào
+      if not title or not address or not price or not area or not room_type or not status or not contact:
+        alert("Vui lòng điền đầy đủ các trường bắt buộc!")
+        return
 
-    try:
-      # Lưu địa điểm vào bảng Rentals
-      app_tables.rentals.add_row(
-        title=title,
-        address=address,
-        price=price,
-        area=area,
-        description=description,
-        room_type=room_type,
-        status=status,
-        contact=contact,
-        image=image,
-        posted_by=user,
-        created_at=anvil.server.call('get_server_time')  # Lấy thời gian từ server
-      )
-      alert("Đăng địa điểm thành công!")
-      open_form('MainForm')
-    except Exception as e:
-      alert(f"Lỗi khi đăng địa điểm: {str(e)}")
+        try:
+          # Chuyển đổi price và area thành số
+          price = float(price.replace(".", ""))  # Xóa dấu chấm trong số
+          area = float(area.replace(".", ""))    # Xóa dấu chấm trong số
+        except ValueError:
+          alert("Giá và diện tích phải là số hợp lệ!")
+          return
 
-  def back_link_click(self, **event_args):
-    """Quay lại MainForm"""
+      # Lấy người dùng hiện tại
+      user = anvil.users.get_user()
+      if not user:
+        alert("Vui lòng đăng nhập để thêm địa điểm!")
+        open_form('LoginForm')
+        return
+
+        # Lưu dữ liệu vào bảng rentals
+        try:
+          app_tables.rentals.add_row(
+            title=title,
+            address=address,
+            price=price,
+            area=area,
+            description=description or None,  # Cho phép để trống
+            room_type=room_type,
+            status=status,
+            contact=contact,
+            image=image,
+            posted_by=user,
+            created_at=datetime.now()
+          )
+          print("Đã lưu địa điểm thành công")
+          alert("Địa điểm đã được thêm thành công!")
+          open_form('MainForm')  # Quay lại MainForm
+        except Exception as e:
+          print(f"Lỗi khi lưu địa điểm: {str(e)}")
+          alert(f"Lỗi khi lưu địa điểm: {str(e)}")
+
+  def cancel_button_click(self, **event_args):
+    # Quay lại MainForm khi nhấn Hủy
+    print("Nhấn nút hủy")
     open_form('MainForm')
