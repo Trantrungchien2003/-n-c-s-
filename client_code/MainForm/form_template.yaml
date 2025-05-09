@@ -19,7 +19,7 @@ components:
       name: rentals_panel
       properties: {item_template: MainForm.ItemTemplate1}
       type: RepeatingPanel
-    layout_properties: {grid_position: 'ZLAJQC,RRFUQQ'}
+    layout_properties: {grid_position: 'DSWHSU,KUGGMW'}
     name: card_2
     properties: {role: card}
     type: ColumnPanel
