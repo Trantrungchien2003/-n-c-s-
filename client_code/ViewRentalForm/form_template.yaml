@@ -1,0 +1,74 @@
+components: []
+container:
+  properties:
+    html: |-
+      <div class="container">
+        <h2 class="title" anvil-bind="title_label.text"></h2>
+        <div class="image-container">
+          <img id="image-label" anvil-bind="image_label.source" alt="Hình ảnh địa điểm" style="width: 100%; height: 300px; object-fit: cover;">
+        </div>
+        <div class="details">
+          <p><strong>Địa chỉ:</strong> <span id="address-label" anvil-bind="address_label.text"></span></p>
+          <p><strong>Giá:</strong> <span id="price-label" anvil-bind="price_label.text"></span> VND</p>
+          <p><strong>Diện tích:</strong> <span id="area-label" anvil-bind="area_label.text"></span> m²</p>
+          <p><strong>Loại phòng:</strong> <span id="room_type-label" anvil-bind="room_type_label.text"></span></p>
+          <p><strong>Tình trạng:</strong> <span id="status-label" anvil-bind="status_label.text"></span></p>
+          <p><strong>Liên hệ:</strong> <span id="contact-label" anvil-bind="contact_label.text"></span></p>
+          <p><strong>Mô tả:</strong> <span id="description-label" anvil-bind="description_label.text"></span></p>
+        </div>
+        <div class="button-group">
+          <button id="back-button" anvil-on="click:back_button_click" class="btn btn-back">Quay Lại</button>
+        </div>
+      </div>
+
+      <style>
+        .container {
+          max-width: 600px;
+          margin: 20px auto;
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+          font-family: Arial, sans-serif;
+        }
+        .title {
+          text-align: center;
+          color: #333;
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+        .image-container {
+          margin-bottom: 20px;
+          border-radius: 4px;
+          overflow: hidden;
+        }
+        .details {
+          margin-bottom: 20px;
+        }
+        .details p {
+          font-size: 16px;
+          color: #555;
+          margin: 10px 0;
+        }
+        .details strong {
+          color: #333;
+        }
+        .button-group {
+          text-align: center;
+        }
+        .btn {
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          background-color: #B0BEC5;
+          color: white;
+        }
+        .btn:hover {
+          opacity: 0.9;
+        }
+      </style>
+  type: HtmlTemplate
+is_package: true
