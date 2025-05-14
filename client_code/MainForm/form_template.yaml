@@ -7,7 +7,7 @@ components:
   - event_bindings: {pressed_enter: text_box_1_pressed_enter}
     layout_properties: {grid_position: 'PMPCYZ,MAGSFR'}
     name: search_box
-    properties: {text: Tìm kiếm theo tiêu đề hoặc địa chỉ...}
+    properties: {placeholder: Tìm kiếm theo tiêu đề hoặc địa chỉ..., text: ''}
     type: TextBox
   - event_bindings: {click: search_button_click}
     layout_properties: {grid_position: 'PMPCYZ,ZQGWTI'}
@@ -15,7 +15,7 @@ components:
     properties: {background: '#2196F3', bold: true, foreground: '#FFFFFF', text: Tìm kiếm}
     type: Button
   - event_bindings: {click: add_rental_button_click}
-    layout_properties: {grid_position: 'ZINFBA,TOJXEQ'}
+    layout_properties: {grid_position: 'LWXEBP,XOLGUN'}
     name: add_rental_button
     properties: {text: ĐĂNG ĐIỂM MỚI, visible: true}
     type: Button
@@ -30,7 +30,7 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'OTXEFQ,ESHMJH'}
   name: rentals_panel
-  properties: {item_template: MainForm.ItemTemplate1}
+  properties: {background: 'theme:Gray 300', item_template: MainForm.ItemTemplate1}
   type: RepeatingPanel
 - layout_properties: {grid_position: 'IAHSJN,YBPLES'}
   name: no_rentals_label

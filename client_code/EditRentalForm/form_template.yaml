@@ -80,13 +80,12 @@ components:
   - event_bindings: {click: save_button_click}
     layout_properties: {grid_position: 'HXXAWO,AGYXPK'}
     name: save_button
-    properties: {text: Đăng địa điểm}
+    properties: {text: Lưu}
     type: Button
-  - event_bindings: {click: back_link_click}
-    layout_properties: {grid_position: 'ZNRNZB,HNLLVR'}
-    name: back_link
-    properties: {text: Quay lại}
-    type: Link
+  - layout_properties: {grid_position: 'HXXAWO,DBJYHD'}
+    name: cancel_button
+    properties: {text: Hủy}
+    type: Button
   layout_properties: {grid_position: 'MPCTRW,GQNTKL'}
   name: card_1
   properties: {col_widths: '{"VZUBJT":10,"YNSCMB":50,"TFCAAU":10,"HVXMFY":50,"UZWZKW":10,"IUPFCF":50,"JOZVOC":10,"QWHYEA":50,"KTAZSZ":10,"AORGEK":50,"EIGROQ":10,"LNHIWS":50}', role: card}

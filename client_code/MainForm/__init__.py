@@ -22,53 +22,53 @@ class MainForm(MainFormTemplate):
     self.logout_button.set_event_handler('click', self.logout_button_click)
 
     # Lấy dữ liệu ban đầu
+    self.refresh_data()
+
+  def refresh_data(self):
     user = anvil.users.get_user()
     if user:
-      self.welcome_label.text = f"Chào mừng {user['email']}!"
-      try:
-        # Lấy toàn bộ dữ liệu của người dùng một lần duy nhất
-        self.all_rentals = list(app_tables.rentals.search(posted_by=user))
-        self.rentals_panel.items = self.all_rentals
-        if len(self.all_rentals) == 0:
+        self.welcome_label.text = f"Chào mừng {user['email']}!"
+    try:
+          # Lấy toàn bộ dữ liệu của người dùng
+          self.all_rentals = list(app_tables.rentals.search(posted_by=user))
+          self.rentals_panel.items = self.all_rentals
+          if len(self.all_rentals) == 0:
+            self.no_rentals_label.visible = True
+            self.rentals_panel.visible = False
+          else:
+            self.no_rentals_label.visible = False
+            self.rentals_panel.visible = True
+    except Exception as e:
+          alert(f"Lỗi khi tải danh sách địa điểm: {str(e)}")
+          self.no_rentals_label.text = f"Lỗi: {str(e)}"
           self.no_rentals_label.visible = True
           self.rentals_panel.visible = False
-        else:
-          self.no_rentals_label.visible = False
-          self.rentals_panel.visible = True
-      except Exception as e:
-        alert(f"Lỗi khi tải danh sách địa điểm: {str(e)}")
-        self.no_rentals_label.text = f"Lỗi: {str(e)}"
-        self.no_rentals_label.visible = True
-        self.rentals_panel.visible = False
     else:
-      alert("Vui lòng đăng nhập trước!")
-      open_form('LoginForm')
+        alert("Vui lòng đăng nhập trước!")
+        open_form('LoginForm')
 
   def search_button_click(self, **event_args):
     # Tìm kiếm tối ưu phía client
     search_text = self.search_box.text.lower().strip()
     if not search_text:
-      # Nếu không có từ khóa, hiển thị toàn bộ danh sách
       self.rentals_panel.items = self.all_rentals
       self.no_rentals_label.visible = len(self.all_rentals) == 0
       self.rentals_panel.visible = len(self.all_rentals) > 0
       return
 
-      # Lọc danh sách dựa trên tiêu đề và địa chỉ
       filtered_rentals = [
         rental for rental in self.all_rentals
         if (search_text in str(rental['title']).lower() or
             search_text in str(rental['address']).lower())
-        ]
+      ]
 
-      # Cập nhật giao diện
-      self.rentals_panel.items = filtered_rentals
-      if len(filtered_rentals) == 0:
-        self.no_rentals_label.visible = True
-        self.rentals_panel.visible = False
-      else:
-        self.no_rentals_label.visible = False
-        self.rentals_panel.visible = True
+    self.rentals_panel.items = filtered_rentals
+    if len(filtered_rentals) == 0:
+      self.no_rentals_label.visible = True
+      self.rentals_panel.visible = False
+    else:
+      self.no_rentals_label.visible = False
+      self.rentals_panel.visible = True
 
   def add_rental_button_click(self, **event_args):
     print("Nhấn nút thêm địa điểm")

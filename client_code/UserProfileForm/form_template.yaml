@@ -1,0 +1,90 @@
+components: []
+container:
+  properties:
+    html: |-
+      <div class="container">
+        <h2 class="title">Hồ Sơ Người Dùng</h2>
+        <div class="profile-info">
+          <label>Email:</label>
+          <span id="email-label" anvil-bind="email_label.text"></span>
+        </div>
+        <div class="profile-info">
+          <label>Số Điện Thoại:</label>
+          <input type="text" id="phone-textbox" anvil-bind="phone_textbox.text" placeholder="Nhập số điện thoại">
+        </div>
+        <div class="profile-info">
+          <label>Mật Khẩu Mới:</label>
+          <input type="password" id="password-textbox" anvil-bind="password_textbox.text" placeholder="Để trống nếu không đổi">
+        </div>
+        <div class="button-group">
+          <button id="save-button" anvil-on="click:save_button_click" class="btn btn-save">Lưu</button>
+          <button id="back-button" anvil-on="click:back_button_click" class="btn btn-back">Quay Lại</button>
+        </div>
+      </div>
+
+      <style>
+        .container {
+          max-width: 500px;
+          margin: 20px auto;
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+          font-family: Arial, sans-serif;
+        }
+        .title {
+          text-align: center;
+          color: #333;
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+        .profile-info {
+          margin-bottom: 15px;
+        }
+        .profile-info label {
+          display: block;
+          font-size: 16px;
+          color: #555;
+          margin-bottom: 5px;
+        }
+        .profile-info span, .profile-info input {
+          width: 100%;
+          padding: 8px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        .profile-info span {
+          background-color: #e9ecef;
+        }
+        .profile-info input {
+          background-color: #fff;
+        }
+        .button-group {
+          text-align: center;
+          margin-top: 20px;
+        }
+        .btn {
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin: 0 10px;
+        }
+        .btn-save {
+          background-color: #4CAF50;
+          color: white;
+        }
+        .btn-back {
+          background-color: #B0BEC5;
+          color: white;
+        }
+        .btn:hover {
+          opacity: 0.9;
+        }
+      </style>
+  type: HtmlTemplate
+is_package: true
