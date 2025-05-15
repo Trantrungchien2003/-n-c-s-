@@ -13,15 +13,39 @@ from datetime import datetime
 @anvil.server.callable
 def get_server_time():
   return datetime.now()
-# This is a server module. It runs on the Anvil server,
-# rather than in the user's browser.
-#
-# To allow anvil.server.call() to call functions here, we mark
-# them with @anvil.server.callable.
-# Here is an example - you can replace it with your own:
-#
-# @anvil.server.callable
-# def say_hello(name):
-#   print("Hello, " + name + "!")
-#   return 42
-#
+
+@anvil.server.callable
+def search_rentals(user_email, search_text):
+  # Lấy người dùng dựa trên email
+  user = app_tables.users.get(email=user_email)
+  if not user:
+    raise Exception("Người dùng không tồn tại!")
+
+    # Tìm kiếm địa điểm của người dùng
+    rentals = app_tables.rentals.search(posted_by=user)
+  if not search_text:
+    return list(rentals)
+
+    # Lọc dữ liệu trên server
+    search_text = search_text.lower()
+  filtered_rentals = [
+    rental for rental in rentals
+    if (search_text in str(rental['title']).lower() or
+        search_text in str(rental['address']).lower())
+  ]
+  return filtered_rentals
+
+@anvil.server.callable
+def delete_rental(rental_id, user_email):
+  # Xác minh người dùng
+  user = app_tables.users.get(email=user_email)
+  if not user:
+    raise Exception("Người dùng không tồn tại!")
+
+    # Tìm địa điểm cần xóa
+    rental = app_tables.rentals.get(posted_by=user, id=rental_id)
+  if not rental:
+    raise Exception("Địa điểm không tồn tại hoặc bạn không có quyền xóa!")
+
+    # Xóa địa điểm
+    rental.delete()

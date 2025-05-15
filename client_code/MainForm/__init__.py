@@ -1,7 +1,7 @@
 from ._anvil_designer import MainFormTemplate
 from anvil import *
 import anvil.users
-from anvil.tables import app_tables
+import anvil.server
 
 class MainForm(MainFormTemplate):
   def __init__(self, **properties):
@@ -27,48 +27,46 @@ class MainForm(MainFormTemplate):
   def refresh_data(self):
     user = anvil.users.get_user()
     if user:
-        self.welcome_label.text = f"Chào mừng {user['email']}!"
-    try:
-          # Lấy toàn bộ dữ liệu của người dùng
-          self.all_rentals = list(app_tables.rentals.search(posted_by=user))
-          self.rentals_panel.items = self.all_rentals
-          if len(self.all_rentals) == 0:
-            self.no_rentals_label.visible = True
-            self.rentals_panel.visible = False
-          else:
-            self.no_rentals_label.visible = False
-            self.rentals_panel.visible = True
-    except Exception as e:
-          alert(f"Lỗi khi tải danh sách địa điểm: {str(e)}")
-          self.no_rentals_label.text = f"Lỗi: {str(e)}"
+      self.welcome_label.text = f"Chào mừng {user['email']}!"
+      try:
+        # Gọi Server Module để lấy dữ liệu
+        self.all_rentals = anvil.server.call('search_rentals', user['email'], "")
+        self.rentals_panel.items = self.all_rentals
+        if len(self.all_rentals) == 0:
           self.no_rentals_label.visible = True
           self.rentals_panel.visible = False
+        else:
+          self.no_rentals_label.visible = False
+          self.rentals_panel.visible = True
+      except Exception as e:
+        alert(f"Lỗi khi tải danh sách địa điểm: {str(e)}")
+        self.no_rentals_label.text = f"Lỗi: {str(e)}"
+        self.no_rentals_label.visible = True
+        self.rentals_panel.visible = False
     else:
-        alert("Vui lòng đăng nhập trước!")
-        open_form('LoginForm')
+      alert("Vui lòng đăng nhập trước!")
+      open_form('LoginForm')
 
   def search_button_click(self, **event_args):
-    # Tìm kiếm tối ưu phía client
-    search_text = self.search_box.text.lower().strip()
-    if not search_text:
-      self.rentals_panel.items = self.all_rentals
-      self.no_rentals_label.visible = len(self.all_rentals) == 0
-      self.rentals_panel.visible = len(self.all_rentals) > 0
+    user = anvil.users.get_user()
+    if not user:
+      alert("Vui lòng đăng nhập trước!")
+      open_form('LoginForm')
       return
 
-      filtered_rentals = [
-        rental for rental in self.all_rentals
-        if (search_text in str(rental['title']).lower() or
-            search_text in str(rental['address']).lower())
-      ]
-
-    self.rentals_panel.items = filtered_rentals
-    if len(filtered_rentals) == 0:
-      self.no_rentals_label.visible = True
-      self.rentals_panel.visible = False
-    else:
-      self.no_rentals_label.visible = False
-      self.rentals_panel.visible = True
+      search_text = self.search_box.text.lower().strip()
+    try:
+      # Gọi Server Module để tìm kiếm
+      filtered_rentals = anvil.server.call('search_rentals', user['email'], search_text)
+      self.rentals_panel.items = filtered_rentals
+      if len(filtered_rentals) == 0:
+        self.no_rentals_label.visible = True
+        self.rentals_panel.visible = False
+      else:
+        self.no_rentals_label.visible = False
+        self.rentals_panel.visible = True
+    except Exception as e:
+      alert(f"Lỗi khi tìm kiếm: {str(e)}")
 
   def add_rental_button_click(self, **event_args):
     print("Nhấn nút thêm địa điểm")

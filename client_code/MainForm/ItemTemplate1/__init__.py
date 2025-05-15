@@ -1,6 +1,7 @@
 from ._anvil_designer import ItemTemplate1Template
 from anvil import *
-import anvil.tables as tables
+import anvil.users
+import anvil.server
 
 class ItemTemplate1(ItemTemplate1Template):
   def __init__(self, **properties):
@@ -27,19 +28,20 @@ class ItemTemplate1(ItemTemplate1Template):
       self.delete_button.set_event_handler('click', self.delete_button_click)
 
     def edit_button_click(self, **event_args):
-      # Mở form chỉnh sửa với dữ liệu địa điểm hiện tại
-      open_form('EditRentalForm', rental_data=self.item)
-      # Làm mới danh sách sau khi chỉnh sửa
+      edit_form = open_form('EditRentalForm', rental_data=self.item)
       self.parent.parent.refresh_data()
 
   def delete_button_click(self, **event_args):
-    # Xác nhận trước khi xóa
     if confirm("Bạn có chắc chắn muốn xóa địa điểm này?"):
-      try:
-        # Xóa địa điểm khỏi bảng rentals
-        self.item.delete()
-        alert("Địa điểm đã được xóa!")
-        # Làm mới danh sách
-        self.parent.parent.refresh_data()
-      except Exception as e:
-        alert(f"Lỗi khi xóa địa điểm: {str(e)}")
+      user = anvil.users.get_user()
+      if not user:
+        alert("Vui lòng đăng nhập trước!")
+        open_form('LoginForm')
+        return
+        try:
+          # Gọi Server Module để xóa
+          anvil.server.call('delete_rental', self.item.get_id(), user['email'])
+          alert("Địa điểm đã được xóa!")
+          self.parent.parent.refresh_data()
+        except Exception as e:
+          alert(f"Lỗi khi xóa địa điểm: {str(e)}")
