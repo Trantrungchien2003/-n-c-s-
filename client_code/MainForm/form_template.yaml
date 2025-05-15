@@ -14,15 +14,17 @@ components:
     name: search_button
     properties: {background: '#2196F3', bold: true, foreground: '#FFFFFF', text: Tìm kiếm}
     type: Button
-  - event_bindings: {click: add_rental_button_click}
+  - data_bindings:
+    - {code: 'self.item['''']', property: font, writeback: false}
+    event_bindings: {click: add_rental_button_click}
     layout_properties: {grid_position: 'LWXEBP,XOLGUN'}
     name: add_rental_button
-    properties: {text: ĐĂNG ĐIỂM MỚI, visible: true}
+    properties: {icon: '', text: ĐĂNG ĐIỂM MỚI, visible: true}
     type: Button
   - event_bindings: {click: logout_button_click}
     layout_properties: {grid_position: 'LWXEBP,YZMLHT'}
     name: logout_button
-    properties: {text: Đăng Xuất}
+    properties: {icon: '', text: Đăng Xuất}
     type: Button
   layout_properties: {grid_position: 'TKBYBI,HEJJPQ'}
   name: column_panel_1
