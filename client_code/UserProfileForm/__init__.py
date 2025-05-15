@@ -48,3 +48,4 @@ class UserProfileForm(UserProfileFormTemplate):
 
   def back_button_click(self, **event_args):
     open_form('MainForm')
+
