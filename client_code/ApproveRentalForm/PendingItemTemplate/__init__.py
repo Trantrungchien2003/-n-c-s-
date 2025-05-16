@@ -14,13 +14,12 @@ class PendingItemTemplate(PendingItemTemplateTemplate):
 
   def approve_button_click(self, **event_args):
     self.item['status'] = "Approved"
-    self.item.save()
+
     alert("Đã duyệt bài đăng!")
     self.parent.refresh_pending_rentals()
 
   def reject_button_click(self, **event_args):
     if confirm("Bạn có chắc chắn từ chối bài đăng này?"):
       self.item['status'] = "Rejected"
-      self.item.save()
       alert("Đã từ chối bài đăng!")
       self.parent.refresh_pending_rentals()

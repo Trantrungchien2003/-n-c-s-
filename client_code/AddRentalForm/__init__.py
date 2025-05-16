@@ -14,7 +14,7 @@ class AddRentalForm(AddRentalFormTemplate):
     title = self.title_textbox.text.strip()
     address = self.address_textbox.text.strip()
     price = self.price_textbox.text.strip()
-    description = self.description_textbox.text.strip()
+    description = self.description_textbox.text.strip() if hasattr(self, 'description_textbox') else ""
     room_type = self.room_type_dropdown.selected_value
     area = self.area_textbox.text.strip()
     status = self.status_dropdown.selected_value
@@ -58,3 +58,13 @@ class AddRentalForm(AddRentalFormTemplate):
 
   def back_link_click(self, **event_args):
     open_form('MainForm')
+
+    # Thêm xử lý nếu cần khi tải lên hình ảnh
+  def image_file_loader_change(self, **event_args):
+    file = self.image_upload.file
+    if file:
+      alert(f"Đã tải lên hình ảnh: {file.name}")
+    else:
+      alert("Không có hình ảnh nào được tải lên!")
+
+    # Thêm xử lý nếu cần cho submit_button (không cần vì đã có submit_button_click)

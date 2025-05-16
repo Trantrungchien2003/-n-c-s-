@@ -23,4 +23,4 @@ class LoginForm(LoginFormTemplate):
       alert(f"Lỗi: {str(e)}")
 
   def signup_link_click(self, **event_args):
-     open_form('SignupForm')
+    open_form('SignupForm')

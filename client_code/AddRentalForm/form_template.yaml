@@ -72,12 +72,12 @@ components:
     name: label_9
     properties: {text: Hình ảnh (tùy chọn)}
     type: Label
-  - event_bindings: {change: image_file_loader_change}
+  - event_bindings: {}
     layout_properties: {grid_position: 'MBLYEG,LNHIWS'}
     name: image_upload
     properties: {}
     type: FileLoader
-  - event_bindings: {click: save_button_click}
+  - event_bindings: {click: submit_button_click}
     layout_properties: {grid_position: 'HXXAWO,AGYXPK'}
     name: submit_button
     properties: {text: Đăng địa điểm}

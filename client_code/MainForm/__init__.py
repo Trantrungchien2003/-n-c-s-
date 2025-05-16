@@ -15,7 +15,7 @@ class MainForm(MainFormTemplate):
     if not self.current_user:
       open_form('LoginForm')
       return
-    self.rentals_panel.add_event_handler('x-refresh', self.refresh_rentals)  # Thêm sự kiện
+    self.rentals_panel.add_event_handler('x-refresh', self.refresh_rentals)
     self.refresh_rentals()
     self.approve_button.visible = app_tables.users.get(email=self.current_user['email'])['role'] == 'admin' if self.current_user else False
 
@@ -51,3 +51,11 @@ class MainForm(MainFormTemplate):
         status="Approved",
         user=self.current_user['email']
       )
+
+    # Thêm xử lý nếu cần nhấn Enter trên search_box
+  def text_box_1_pressed_enter(self, **event_args):
+    self.search_box_change(**event_args)  # Gọi hàm search_box_change khi nhấn Enter
+
+    # Thêm xử lý nếu có search_button
+  def search_button_click(self, **event_args):
+    self.search_box_change(**event_args)  # Gọi hàm search_box_change khi nhấp nút tìm kiếm

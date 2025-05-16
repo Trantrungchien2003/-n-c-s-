@@ -11,41 +11,57 @@ import anvil.server
 from datetime import datetime
 
 @anvil.server.callable
-def get_server_time():
-  return datetime.now()
-  
-@anvil.server.callable
-def search_rentals(user_email, search_text):
-  # Lấy người dùng dựa trên email
-  user = app_tables.users.get(email=user_email)
-  if not user:
-    raise Exception("Người dùng không tồn tại!")
-
-    # Tìm kiếm địa điểm của người dùng
-  rentals = app_tables.rentals.search(posted_by=user)
-  if not search_text:
-    return list(rentals)
-
-    # Lọc dữ liệu trên server
-  search_text = search_text.lower()
-  filtered_rentals = [
-    rental for rental in rentals
-    if (search_text in str(rental['title']).lower() or
-        search_text in str(rental['address']).lower())
-  ]
-  return filtered_rentals
+def add_user(email, password, role, phone):
+  try:
+    app_tables.users.add_row(
+      email=email,
+      password=password,
+      role=role,
+      phone=phone
+    )
+    return True
+  except Exception as e:
+    raise Exception(f"Không thể thêm người dùng: {str(e)}")
 
 @anvil.server.callable
-def delete_rental(rental_id, user_email):
-  # Xác minh người dùng
-  user = app_tables.users.get(email=user_email)
-  if not user:
-    raise Exception("Người dùng không tồn tại!")
+def add_rental(title, address, price, description, room_type, area, status, contact, user, image=None):
+  try:
+    data = {
+      "title": title,
+      "address": address,
+      "price": price,
+      "description": description,
+      "room_type": room_type,
+      "area": area,
+      "status": status,
+      "contact": contact,
+      "user": user
+    }
+    if image:
+      data["image"] = image
+    app_tables.rentals.add_row(**data)
+    return True
+  except Exception as e:
+    raise Exception(f"Không thể thêm bài đăng: {str(e)}")
 
-    # Tìm địa điểm cần xóa
-  rental = app_tables.rentals.get(posted_by=user, id=rental_id)
+@anvil.server.callable
+def approve_rental(rental_id):
+  rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
-    raise Exception("Địa điểm không tồn tại hoặc bạn không có quyền xóa!")
+    raise Exception("Không tìm thấy bài đăng!")
+  user = app_tables.users.get(email=rental['user'])
+  if not user:
+    raise Exception("Không tìm thấy người dùng!")
+  rental.update(status="Approved")
+  return f"Bài đăng '{rental['title']}' đã được duyệt!"
 
-    # Xóa địa điểm
-  rental.delete()
+@anvil.server.callable
+def reject_rental(rental_id):
+  rental = app_tables.rentals.get_by_id(rental_id)
+  if not rental:
+    raise Exception("Không tìm thấy bài đăng!")
+  user = app_tables.users.get(email=rental['user'])
+  if not user:
+    raise Exception("Không tìm thấy người dùng!")
+  rental.update(status="Rejected")
+  return f"Bài đăng '{rental['title']}' đã bị từ chối."

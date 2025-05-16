@@ -11,6 +11,8 @@ from anvil.tables import app_tables
 class ApproveRentalForm(ApproveRentalFormTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    # Truyền phương thức refresh_pending_rentals vào pending_rentals_panel
+    self.pending_rentals_panel.refresh_pending_rentals = self.refresh_pending_rentals
     self.refresh_pending_rentals()
 
   def refresh_pending_rentals(self):
@@ -19,7 +21,7 @@ class ApproveRentalForm(ApproveRentalFormTemplate):
   def back_button_click(self, **event_args):
     open_form('MainForm')
 
-class PendingItemTemplate(PendingItemTemplate):
+class PendingItemTemplate:
   def __init__(self, **properties):
     self.init_components(**properties)
 
@@ -27,7 +29,8 @@ class PendingItemTemplate(PendingItemTemplate):
     try:
       message = anvil.server.call('approve_rental', self.item.get_id())
       alert(message)
-      self.parent.refresh_pending_rentals()
+      # Gọi phương thức từ pending_rentals_panel
+      self.parent.refresh_pending_rentals()  # Dòng 19
     except Exception as e:
       alert(f"Lỗi: {str(e)}")
 
@@ -36,6 +39,7 @@ class PendingItemTemplate(PendingItemTemplate):
       try:
         message = anvil.server.call('reject_rental', self.item.get_id())
         alert(message)
+        # Gọi phương thức từ pending_rentals_panel
         self.parent.refresh_pending_rentals()
       except Exception as e:
         alert(f"Lỗi: {str(e)}")
