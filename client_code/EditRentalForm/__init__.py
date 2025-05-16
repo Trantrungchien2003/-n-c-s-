@@ -1,24 +1,34 @@
 from ._anvil_designer import EditRentalFormTemplate
 from anvil import *
+import anvil.server
+import anvil.users
 from anvil.tables import app_tables
+import anvil.media
 
 class EditRentalForm(EditRentalFormTemplate):
-  def __init__(self, item=None, **properties):
+  def __init__(self, rental=None, **properties):
     self.init_components(**properties)
-    self.item = item
-    if self.item:
-      self.title_textbox.text = self.item['title']
-      self.address_textbox.text = self.item['address']
-      self.price_textbox.text = str(self.item['price'])
-      self.description_textbox.text = self.item['description'] if 'description' in self.item else ""
-      self.room_type_dropdown.selected_value = self.item['room_type']
-      self.area_textbox.text = str(self.item['area'])
-      self.status_dropdown.selected_value = self.item['status']
-      self.contact_textbox.text = self.item['contact']
-      self.room_type_dropdown.items = ["Chọn loại phòng", "Căn hộ", "Nhà riêng", "Phòng trọ"]
-      self.status_dropdown.items = ["Chọn trạng thái", "Còn trống", "Đã cho thuê", "Đang bảo trì"]
+    self.rental = rental
 
-  def save_button_click(self, **event_args):
+    # Kiểm tra xem rental có tồn tại và có ID hợp lệ không
+    if not self.rental or not hasattr(self.rental, 'get_id') or not self.rental.get_id():
+      alert("Không tìm thấy bài đăng hoặc bài đăng không hợp lệ!")
+      open_form('MainForm')
+      return
+
+      # Điền thông tin bài đăng vào các trường
+    self.room_type_dropdown.items = ["Chọn loại phòng", "Căn hộ", "Nhà riêng", "Phòng trọ"]
+    self.status_dropdown.items = ["Chọn trạng thái", "Còn trống", "Đã cho thuê", "Đang bảo trì"]
+    self.title_textbox.text = self.rental['title']
+    self.address_textbox.text = self.rental['address']
+    self.price_textbox.text = str(self.rental['price'])
+    self.description_textbox.text = self.rental['description'] if self.rental['description'] else ""
+    self.room_type_dropdown.selected_value = self.rental['room_type']
+    self.area_textbox.text = str(self.rental['area'])
+    self.status_dropdown.selected_value = self.rental['status']
+    self.contact_textbox.text = self.rental['contact']
+
+  def submit_button_click(self, **event_args):
     title = self.title_textbox.text.strip()
     address = self.address_textbox.text.strip()
     price = self.price_textbox.text.strip()
@@ -27,9 +37,10 @@ class EditRentalForm(EditRentalFormTemplate):
     area = self.area_textbox.text.strip()
     status = self.status_dropdown.selected_value
     contact = self.contact_textbox.text.strip()
+    image_file = self.image_upload.file
 
     if not all([title, address, price, room_type != "Chọn loại phòng", area, status != "Chọn trạng thái", contact]):
-      alert("Vui lòng điền đầy đủ thông tin!")
+      alert("Vui lòng điền đầy đủ thông tin và chọn loại phòng/trạng thái hợp lệ!")
       return
     try:
       price = float(price.replace("VND", "").replace(".", "").strip())
@@ -41,18 +52,35 @@ class EditRentalForm(EditRentalFormTemplate):
       alert("Số điện thoại không hợp lệ!")
       return
 
-    self.item.update(
-      title=title,
-      address=address,
-      price=price,
-      description=description,
-      room_type=room_type,
-      area=area,
-      status=status,
-      contact=contact
-    )
-    alert("Cập nhật địa điểm thành công!")
-    open_form('MainForm')
+    try:
+      # Gọi server để cập nhật bài đăng
+      success = anvil.server.call(
+        'update_rental',
+        rental_id=self.rental.get_id(),
+        title=title,
+        address=address,
+        price=price,
+        description=description,
+        room_type=room_type,
+        area=area,
+        status="Pending" if status == "Pending" else status,
+        contact=contact,
+        image=image_file if image_file else self.rental['image']
+      )
+      if success:
+        alert("Cập nhật bài đăng thành công! Bài đăng sẽ được duyệt lại nếu có thay đổi trạng thái.")
+        open_form('MainForm')
+      else:
+        alert("Không thể cập nhật bài đăng!")
+    except Exception as e:
+      alert(f"Lỗi khi cập nhật bài đăng: {str(e)}")
 
   def cancel_button_click(self, **event_args):
     open_form('MainForm')
+
+  def image_file_loader_change(self, **event_args):
+    file = self.image_upload.file
+    if file:
+      alert(f"Đã tải lên hình ảnh mới: {file.name}")
+    else:
+      alert("Không có hình ảnh nào được tải lên!")

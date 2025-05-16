@@ -13,7 +13,7 @@ class ItemTemplate1(ItemTemplate1Template):
   def edit_link_click(self, **event_args):
     open_form('EditRentalForm', item=self.item)
 
-  def delete_button_click(self, **event_args):
+  def delete_link_click(self, **event_args):
     if confirm("Bạn có chắc chắn muốn xóa địa điểm này?"):
       self.item.delete()
       self.parent.raise_event('x-refresh')

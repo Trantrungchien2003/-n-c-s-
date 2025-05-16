@@ -31,7 +31,7 @@ components:
     name: search_box
     properties: {placeholder: Tìm kiếm theo tiêu đề hoặc địa chỉ..., text: ''}
     type: TextBox
-  - event_bindings: {}
+  - event_bindings: {click: search_button_click}
     layout_properties: {grid_position: 'PMPCYZ,ZQGWTI'}
     name: search_button
     properties: {background: '#2196F3', bold: true, foreground: '#FFFFFF', text: Tìm kiếm}

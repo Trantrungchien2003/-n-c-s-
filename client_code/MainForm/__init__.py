@@ -32,7 +32,7 @@ class MainForm(MainFormTemplate):
     open_form('ApproveRentalForm')
 
   def profile_link_click(self, **event_args):
-    open_form('UserProfileForm')  # Dòng 35
+    open_form('UserProfileForm')
 
   def logout_button_click(self, **event_args):
     anvil.users.logout()
@@ -57,3 +57,40 @@ class MainForm(MainFormTemplate):
 
   def search_button_click(self, **event_args):
     self.search_box_change(**event_args)
+
+class ItemTemplate1:
+  def __init__(self, **properties):
+    self.init_components(**properties)
+    user = anvil.users.get_user()
+    user_record = app_tables.users.get(email=user['email'])
+    is_admin = user_record['role'] == 'admin'
+    is_owner = self.item['user'] == user['email']
+    self.edit_link.visible = is_admin or is_owner
+    self.delete_link.visible = is_admin or is_owner
+
+  def view_link_click(self, **event_args):
+    rental = self.item
+    details = (
+      f"Tiêu đề: {rental['title']}\n"
+      f"Địa chỉ: {rental['address']}\n"
+      f"Giá: {rental['price']} VND\n"
+      f"Loại phòng: {rental['room_type']}\n"
+      f"Diện tích: {rental['area']} m²\n"
+      f"Trạng thái: {rental['status']}\n"
+      f"Liên hệ: {rental['contact']}\n"
+      f"Mô tả: {rental['description'] if rental['description'] else 'Không có mô tả'}"
+    )
+    alert(details, title="Chi tiết bài đăng")
+
+  def edit_link_click(self, **event_args):
+    # Truyền trực tiếp self.item vào EditRentalForm
+    open_form('EditRentalForm', rental=self.item)
+
+  def delete_link_click(self, **event_args):
+    if confirm("Bạn có chắc chắn muốn xóa bài đăng này?"):
+      try:
+        anvil.server.call('delete_rental', self.item.get_id())
+        alert("Xóa bài đăng thành công!")
+        self.parent.raise_event('x-refresh')
+      except Exception as e:
+        alert(f"Lỗi khi xóa bài đăng: {str(e)}")

@@ -69,6 +69,9 @@ db_schema:
     - admin_ui: {order: 7, width: 200}
       name: role
       type: string
+    - admin_ui: {order: 8, width: 200}
+      name: mfa
+      type: simpleObject
     server: full
     title: Users
 name: UserAuthApp
@@ -84,7 +87,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_signup: true, confirm_email: false, enable_automatically: true, require_secure_passwords: true, use_email: true, use_google: false}
+- client_config: {allow_signup: true, confirm_email: false, enable_automatically: true, mfa_timeout_days: 0, require_mfa: false, require_secure_passwords: true, use_email: true, use_google: false}
   server_config: {user_table: users}
   source: /runtime/services/anvil/users.yml
 - client_config: {}

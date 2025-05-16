@@ -65,3 +65,30 @@ def reject_rental(rental_id):
     raise Exception("Không tìm thấy người dùng!")
   rental.update(status="Rejected")
   return f"Bài đăng '{rental['title']}' đã bị từ chối."
+
+@anvil.server.callable
+def update_rental(rental_id, title, address, price, description, room_type, area, status, contact, image):
+  rental = app_tables.rentals.get_by_id(rental_id)
+  if not rental:
+    raise Exception("Không tìm thấy bài đăng!")
+  rental.update(
+    title=title,
+    address=address,
+    price=price,
+    description=description,
+    room_type=room_type,
+    area=area,
+    status=status,
+    contact=contact,
+    image=image
+  )
+  return True
+
+@anvil.server.callable
+def delete_rental(rental_id):
+  rental = app_tables.rentals.get_by_id(rental_id)
+  if not rental:
+    raise Exception("Không tìm thấy bài đăng!")
+  rental.delete()
+  return True
+  
