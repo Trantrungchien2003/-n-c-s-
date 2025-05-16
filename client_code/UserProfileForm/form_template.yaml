@@ -5,13 +5,12 @@ components:
     properties: {align: center, bold: true, text: HỒ SƠ NGƯỜI DÙNG}
     type: Label
   - data_bindings:
-    - {code: 'Email: " + self.current_user[''email'']', property: text, writeback: false}
+    - {code: 'self.current_user[''email'']', property: text, writeback: false}
     layout_properties: {grid_position: 'UFLRJN,SUTCRV'}
     name: email_label
     properties: {text: 'Email:'}
     type: Label
-  - data_bindings:
-    - {code: 'self.current_user[''phone'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'UFLRJN,HFMOVN'}
     name: phone_textbox
     properties: {placeholder: Nhập số điện thoại}

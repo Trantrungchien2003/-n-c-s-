@@ -13,37 +13,37 @@ components:
     properties: {}
     type: Label
   - data_bindings:
-    - {code: 'Giá: " + str(self.item[''price'']) + " VND/tháng', property: text, writeback: false}
+    - {code: 'self.item[''price'']', property: text, writeback: false}
     layout_properties: {grid_position: 'TJVIXB,DFWNEV JMUPLO,OZAGSK'}
     name: price_label
     properties: {}
     type: Label
   - data_bindings:
-    - {code: 'Diện tích: " + str(self.item[''area'']) + " m²', property: text, writeback: false}
+    - {code: 'self.item[''area'']', property: text, writeback: false}
     layout_properties: {grid_position: 'TJVIXB,DFWNEV BFGAJX,PLVACR'}
     name: area_label
     properties: {}
     type: Label
   - data_bindings:
-    - {code: 'Loại phòng: " + self.item[''room_type'']', property: text, writeback: false}
+    - {code: 'self.item[''room_type'']', property: text, writeback: false}
     layout_properties: {grid_position: 'TJVIXB,DFWNEV QIYZRB,SPXGYV'}
     name: room_type_label
     properties: {}
     type: Label
   - data_bindings:
-    - {code: 'Trạng thái: " + self.item[''status'']', property: text, writeback: false}
+    - {code: 'self.item[''status'']', property: text, writeback: false}
     layout_properties: {grid_position: 'TJVIXB,DFWNEV DJWVZD,CRZOJM'}
     name: status_label
     properties: {}
     type: Label
   - data_bindings:
-    - {code: 'Liên hệ: " + self.item[''contact'']', property: text, writeback: false}
+    - {code: 'self.item[''contact'']', property: text, writeback: false}
     layout_properties: {grid_position: 'TJVIXB,DFWNEV ZXWRWQ,YYNYWD'}
     name: contact_label
     properties: {}
     type: Label
   - data_bindings:
-    - {code: 'Mô tả: " + self.item[''description'']', property: text, writeback: false}
+    - {code: 'self.item[''description'']', property: text, writeback: false}
     layout_properties: {grid_position: 'TJVIXB,DFWNEV RRWFTM,XJVYUV'}
     name: description_label
     properties: {}
