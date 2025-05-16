@@ -30,7 +30,7 @@ components:
       margin: ['2', null, '2', null]
     type: TextBox
   - layout_properties: {grid_position: 'DLZSTJ,YNSCMB TZVGJV,LOUFHE'}
-    name: description_textarea
+    name: description_textbox
     properties: {height: 47.199981689453125}
     type: TextArea
   - layout_properties: {grid_position: 'DLZSTJ,YNSCMB BECXGP,UZWZKW'}
@@ -72,7 +72,7 @@ components:
     name: label_9
     properties: {text: Hình ảnh (tùy chọn)}
     type: Label
-  - event_bindings: {}
+  - event_bindings: {change: image_upload_change}
     layout_properties: {grid_position: 'MBLYEG,LNHIWS'}
     name: image_upload
     properties: {}

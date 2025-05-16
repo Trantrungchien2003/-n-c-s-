@@ -67,19 +67,17 @@ def reject_rental(rental_id):
   return f"Bài đăng '{rental['title']}' đã bị từ chối."
 
 @anvil.server.callable
-def update_rental(rental_id, title, address, price, description, room_type, area, status, contact, image):
+def update_rental(rental_id, title, address, price, room_type, area, status, image):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
-    raise Exception("Không tìm thấy bài đăng!")
+    raise Exception("Không tìm thấy bài đăng trong bảng dữ liệu!")
   rental.update(
     title=title,
     address=address,
     price=price,
-    description=description,
     room_type=room_type,
     area=area,
     status=status,
-    contact=contact,
     image=image
   )
   return True

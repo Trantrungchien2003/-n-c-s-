@@ -1,5 +1,6 @@
 from ._anvil_designer import AddRentalFormTemplate
 from anvil import *
+import anvil.server  # Thêm import
 import anvil.users
 from anvil.tables import app_tables
 import anvil.media
@@ -14,7 +15,7 @@ class AddRentalForm(AddRentalFormTemplate):
     title = self.title_textbox.text.strip()
     address = self.address_textbox.text.strip()
     price = self.price_textbox.text.strip()
-    description = self.description_textbox.text.strip() if hasattr(self, 'description_textbox') else ""
+    description = self.description_textbox.text.strip()
     room_type = self.room_type_dropdown.selected_value
     area = self.area_textbox.text.strip()
     status = self.status_dropdown.selected_value
@@ -34,37 +35,47 @@ class AddRentalForm(AddRentalFormTemplate):
       alert("Số điện thoại không hợp lệ!")
       return
 
-    data = {
-      "title": title,
-      "address": address,
-      "price": price,
-      "description": description,
-      "room_type": room_type,
-      "area": area,
-      "status": "Pending",
-      "contact": contact,
-      "user": anvil.users.get_user()['email']
-    }
+    try:
+      user = anvil.users.get_user()
+      if not user:
+        alert("Vui lòng đăng nhập để thêm bài đăng!")
+        return
 
-    if image_file:
-      data["image"] = image_file
+        # Thêm bài đăng vào rentals
+      rental = app_tables.rentals.add_row(
+        title=title,
+        address=address,
+        price=price,
+        room_type=room_type,
+        area=area,
+        status="Pending",
+        user=user['email'],
+        image=image_file
+      )
 
-    app_tables.rentals.add_row(**data)
-    alert("Bài đăng của bạn đã được gửi và đang chờ duyệt!")
-    open_form('MainForm')
+      # Thêm rental_details
+      detail = app_tables.rental_details.add_row(
+        description=description,
+        contact=contact,
+        rental=rental
+      )
+      rental.update(rental_details=detail)
+
+      alert("Thêm bài đăng thành công! Vui lòng chờ duyệt.")
+      open_form('MainForm')
+    except Exception as e:
+      alert(f"Lỗi khi thêm bài đăng: {str(e)}")
 
   def cancel_button_click(self, **event_args):
     open_form('MainForm')
 
-  def back_link_click(self, **event_args):
-    open_form('MainForm')
-
-    # Thêm xử lý nếu cần khi tải lên hình ảnh
-  def image_file_loader_change(self, **event_args):
+  def image_upload_change(self, **event_args):
     file = self.image_upload.file
     if file:
       alert(f"Đã tải lên hình ảnh: {file.name}")
     else:
       alert("Không có hình ảnh nào được tải lên!")
 
-    # Thêm xử lý nếu cần cho submit_button (không cần vì đã có submit_button_click)
+  def back_link_click(self, **event_args):
+    # Quay lại MainForm khi nhấp vào back_link
+    open_form('MainForm')

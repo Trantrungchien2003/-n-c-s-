@@ -77,22 +77,19 @@ class ItemTemplate1:
       f"Loại phòng: {rental['room_type']}\n"
       f"Diện tích: {rental['area']} m²\n"
       f"Trạng thái: {rental['status']}\n"
-      f"Liên hệ: {rental['contact']}\n"
-      f"Mô tả: {rental['description'] if rental['description'] else 'Không có mô tả'}"
+      f"Liên hệ: {rental['rental_details']['contact']}\n"
+      f"Mô tả: {rental['rental_details']['description'] if rental['rental_details']['description'] else 'Không có mô tả'}"
     )
     alert(details, title="Chi tiết bài đăng")
 
   def edit_link_click(self, **event_args):
-    # Kiểm tra self.item và get_id trước khi mở form
-    try:
-      rental_id = self.item.get_id()
-      if not rental_id:
-        alert("Không tìm thấy ID bài đăng!")
-        return
-    except AttributeError as e:
-      alert(f"Lỗi: Bài đăng không hợp lệ! {str(e)}")
+    # Truy vấn lại rental để đảm bảo row object hợp lệ
+    rental_id = self.item.get_id()
+    rental = app_tables.rentals.get_by_id(rental_id)
+    if not rental:
+      alert("Không tìm thấy bài đăng!")
       return
-    open_form('EditRentalForm', rental=self.item)
+    open_form('EditRentalForm', rental=rental)
 
   def delete_link_click(self, **event_args):
     if confirm("Bạn có chắc chắn muốn xóa bài đăng này?"):
