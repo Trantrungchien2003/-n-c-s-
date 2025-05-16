@@ -82,11 +82,12 @@ components:
     name: submit_button
     properties: {text: Đăng địa điểm}
     type: Button
-  - layout_properties: {grid_position: 'HXXAWO,BLVXJT'}
+  - event_bindings: {click: cancel_button_click}
+    layout_properties: {grid_position: 'HXXAWO,BLVXJT'}
     name: cancel_button
     properties: {text: Hủy}
     type: Button
-  - event_bindings: {click: back_link_click}
+  - event_bindings: {click: cancel_button_click}
     layout_properties: {grid_position: 'ZNRNZB,HNLLVR'}
     name: back_link
     properties: {text: Quay lại}

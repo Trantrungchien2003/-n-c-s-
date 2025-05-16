@@ -11,51 +11,76 @@ import anvil.server
 from datetime import datetime
 
 @anvil.server.callable
-def get_rental_by_id(rental_id):
-  user = anvil.users.get_user()
+def add_user(email, password, role, phone):
+  try:
+    app_tables.users.add_row(
+      email=email,
+      password=password,
+      role=role,
+      phone=phone
+    )
+    return True
+  except Exception as e:
+    raise Exception(f"Không thể thêm người dùng: {str(e)}")
+
+@anvil.server.callable
+def add_rental(title, address, price, description, room_type, area, status, contact, user, image=None):
+  try:
+    data = {
+      "title": title,
+      "address": address,
+      "price": price,
+      "description": description,
+      "room_type": room_type,
+      "area": area,
+      "status": status,
+      "contact": contact,
+      "user": user
+    }
+    if image:
+      data["image"] = image
+    app_tables.rentals.add_row(**data)
+    return True
+  except Exception as e:
+    raise Exception(f"Không thể thêm bài đăng: {str(e)}")
+
+@anvil.server.callable
+def approve_rental(rental_id):
+  rental = app_tables.rentals.get_by_id(rental_id)
+  if not rental:
+    raise Exception("Không tìm thấy bài đăng!")
+  user = app_tables.users.get(email=rental['user'])
   if not user:
-    raise Exception("User không đăng nhập!")
-  rental = app_tables.rentals.get_by_id(rental_id)
-  if not rental:
-    return None
-  user_record = app_tables.users.get(email=user['email'])
-  is_admin = user_record['role'] == 'admin'
-  is_owner = rental['user'] == user['email']
-  if not (is_admin or is_owner):
-    raise Exception("Bạn không có quyền truy cập bài đăng này!")
-  return rental
+    raise Exception("Không tìm thấy người dùng!")
+  rental.update(status="Approved")
+  return f"Bài đăng '{rental['title']}' đã được duyệt!"
 
 @anvil.server.callable
-def add_rental(title, address, price, room_type, area, status, description, contact, image, user_email):
-  app_tables.rentals.add_row(
-    title=title,
-    address=address,
-    price=price,
-    room_type=room_type,
-    area=area,
-    status=status,
-    user=user_email,
-    image=image,
-    description=description,
-    contact=contact
-  )
-  return True
-
-@anvil.server.callable
-def update_rental(rental_id, title, address, price, room_type, area, status, image, description, contact):
+def reject_rental(rental_id):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
-    raise Exception("Không tìm thấy bài đăng trong bảng dữ liệu!")
+    raise Exception("Không tìm thấy bài đăng!")
+  user = app_tables.users.get(email=rental['user'])
+  if not user:
+    raise Exception("Không tìm thấy người dùng!")
+  rental.update(status="Rejected")
+  return f"Bài đăng '{rental['title']}' đã bị từ chối."
+
+@anvil.server.callable
+def update_rental(rental_id, title, address, price, description, room_type, area, status, contact, image):
+  rental = app_tables.rentals.get_by_id(rental_id)
+  if not rental:
+    raise Exception("Không tìm thấy bài đăng!")
   rental.update(
     title=title,
     address=address,
     price=price,
+    description=description,
     room_type=room_type,
     area=area,
     status=status,
-    image=image,
-    description=description,
-    contact=contact
+    contact=contact,
+    image=image
   )
   return True
 

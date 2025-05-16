@@ -21,11 +21,9 @@ class MainForm(MainFormTemplate):
 
   def refresh_rentals(self, **event_args):
     if self.current_user and app_tables.users.get(email=self.current_user['email'])['role'] == 'admin':
-      rentals = app_tables.rentals.search()
+      self.rentals_panel.items = app_tables.rentals.search()
     else:
-      rentals = app_tables.rentals.search(status="Approved", user=self.current_user['email'])
-    self.rentals_panel.items = rentals
-    print(f"Debug: rentals in refresh_rentals = {list(rentals)}")  # Debug
+      self.rentals_panel.items = app_tables.rentals.search(status="Approved", user=self.current_user['email'])
 
   def add_rental_button_click(self, **event_args):
     open_form('AddRentalForm')
@@ -66,69 +64,31 @@ class ItemTemplate1:
     user = anvil.users.get_user()
     user_record = app_tables.users.get(email=user['email'])
     is_admin = user_record['role'] == 'admin'
-    is_owner = self.item['user'] == user['email'] if self.item and 'user' in self.item else False
+    is_owner = self.item['user'] == user['email']
     self.edit_link.visible = is_admin or is_owner
     self.delete_link.visible = is_admin or is_owner
-    print(f"Debug: self.item in ItemTemplate1 = {self.item}")  # Debug
 
   def view_link_click(self, **event_args):
-    try:
-      if not self.item or not hasattr(self.item, 'get_id'):
-        alert("Dữ liệu bài đăng không hợp lệ! Vui lòng làm mới danh sách.")
-        self.parent.raise_event('x-refresh')
-        return
-
-      rental_id = self.item.get_id()
-      print(f"Debug: rental_id in view_link_click = {rental_id}")  # Debug
-      try:
-        rental = anvil.server.call('get_rental_by_id', rental_id)
-        print(f"Debug: rental in view_link_click = {rental}")  # Debug
-      except Exception as e:
-        print(f"Debug: Error in get_rental_by_id: {str(e)}")  # Log lỗi từ server
-        alert(f"Lỗi khi truy vấn bài đăng: {str(e)}")
-        self.parent.raise_event('x-refresh')
-        return
-
-      if not rental:
-        alert("Không tìm thấy bài đăng! Có thể bài đăng đã bị xóa hoặc bạn không có quyền truy cập.")
-        self.parent.raise_event('x-refresh')
-        return
-
-      open_form('ViewRentalForm', rental=rental)
-    except Exception as e:
-      alert(f"Lỗi khi mở form xem chi tiết: {str(e)}")
-      self.parent.raise_event('x-refresh')
+    rental = self.item
+    details = (
+      f"Tiêu đề: {rental['title']}\n"
+      f"Địa chỉ: {rental['address']}\n"
+      f"Giá: {rental['price']} VND\n"
+      f"Loại phòng: {rental['room_type']}\n"
+      f"Diện tích: {rental['area']} m²\n"
+      f"Trạng thái: {rental['status']}\n"
+      f"Liên hệ: {rental['contact']}\n"
+      f"Mô tả: {rental['description'] if rental['description'] else 'Không có mô tả'}"
+    )
+    alert(details, title="Chi tiết bài đăng")
 
   def edit_link_click(self, **event_args):
-    try:
-      if not self.item or not hasattr(self.item, 'get_id'):
-        alert("Dữ liệu bài đăng không hợp lệ! Vui lòng làm mới danh sách.")
-        self.parent.raise_event('x-refresh')
-        return
-
-      rental_id = self.item.get_id()
-      print(f"Debug: rental_id in ItemTemplate1 = {rental_id}")  # Debug
-      rental = anvil.server.call('get_rental_by_id', rental_id)
-      print(f"Debug: rental in edit_link_click = {rental}")  # Debug
-
-      if not rental:
-        alert("Không tìm thấy bài đăng trong bảng dữ liệu! Có thể bài đăng đã bị xóa hoặc bạn không có quyền truy cập.")
-        self.parent.raise_event('x-refresh')
-        return
-
-      open_form('EditRentalForm', rental=rental)
-    except Exception as e:
-      alert(f"Lỗi khi mở form chỉnh sửa: {str(e)}")
-      self.parent.raise_event('x-refresh')
+    # Truyền trực tiếp self.item vào EditRentalForm
+    open_form('EditRentalForm', rental=self.item)
 
   def delete_link_click(self, **event_args):
     if confirm("Bạn có chắc chắn muốn xóa bài đăng này?"):
       try:
-        if not self.item or not hasattr(self.item, 'get_id'):
-          alert("Dữ liệu bài đăng không hợp lệ! Vui lòng làm mới danh sách.")
-          self.parent.raise_event('x-refresh')
-          return
-
         anvil.server.call('delete_rental', self.item.get_id())
         alert("Xóa bài đăng thành công!")
         self.parent.raise_event('x-refresh')
