@@ -1,49 +1,41 @@
 components:
 - components:
-  - data_bindings:
-    - {code: 'self.item[''title'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV EBSBHN,AGTOYI'}
     name: title_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''address'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV DQKSMR,BUQMDL'}
     name: address_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''price'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV JMUPLO,OZAGSK'}
     name: price_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''area'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV BFGAJX,PLVACR'}
     name: area_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''room_type'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV QIYZRB,SPXGYV'}
     name: room_type_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''status'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV DJWVZD,CRZOJM'}
     name: status_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''contact'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV ZXWRWQ,YYNYWD'}
     name: contact_label
     properties: {}
     type: Label
-  - data_bindings:
-    - {code: 'self.item[''description'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'TJVIXB,DFWNEV RRWFTM,XJVYUV'}
     name: description_label
     properties: {}
