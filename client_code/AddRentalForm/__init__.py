@@ -8,7 +8,7 @@ class AddRentalForm(AddRentalFormTemplate):
   def __init__(self, **properties):
     # Khởi tạo giao diện
     self.init_components(**properties)
-    # Đặt giá trị mặc định cho dropdown nếu cần
+    # Đặt giá trị mặc định cho dropdown
     self.room_type_dropdown.items = ["Chọn loại phòng", "Căn hộ", "Nhà riêng", "Phòng trọ"]
     self.status_dropdown.items = ["Chọn trạng thái", "Còn trống", "Đã cho thuê", "Đang bảo trì"]
 
@@ -51,10 +51,9 @@ class AddRentalForm(AddRentalFormTemplate):
       "user": anvil.users.get_user()['email']  # Gắn địa điểm với người dùng hiện tại
     }
 
-    # Xử lý tải ảnh (nếu có)
+    # Xử lý tải ảnh (lưu dưới dạng Media)
     if image_file:
-      media_object = anvil.media.from_file(image_file)
-      data["image_url"] = media_object.get_url()
+      data["image"] = image_file  # Lưu đối tượng Media trực tiếp
 
       # Thêm vào bảng rentals
     app_tables.rentals.add_row(**data)
