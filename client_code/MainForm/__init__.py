@@ -32,7 +32,7 @@ class MainForm(MainFormTemplate):
     open_form('ApproveRentalForm')
 
   def profile_link_click(self, **event_args):
-    open_form('UserProfileForm')
+    open_form('UserProfileForm')  # Dòng 35
 
   def logout_button_click(self, **event_args):
     anvil.users.logout()
@@ -52,10 +52,8 @@ class MainForm(MainFormTemplate):
         user=self.current_user['email']
       )
 
-    # Thêm xử lý nếu cần nhấn Enter trên search_box
   def text_box_1_pressed_enter(self, **event_args):
-    self.search_box_change(**event_args)  # Gọi hàm search_box_change khi nhấn Enter
+    self.search_box_change(**event_args)
 
-    # Thêm xử lý nếu có search_button
   def search_button_click(self, **event_args):
-    self.search_box_change(**event_args)  # Gọi hàm search_box_change khi nhấp nút tìm kiếm
+    self.search_box_change(**event_args)
