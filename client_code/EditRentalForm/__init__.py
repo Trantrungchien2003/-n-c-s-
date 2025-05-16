@@ -8,11 +8,9 @@ class EditRentalForm(EditRentalFormTemplate):
     self.init_components(**properties)
     self.rental_data = rental_data
 
-    # Danh sách tùy chọn cho "Loại phòng" và "Tình trạng"
     self.room_type_dropdown.items = ["Căn hộ", "Nhà riêng", "Phòng trọ", "Văn phòng", "Khác"]
     self.status_dropdown.items = ["Đang cho thuê", "Đã cho thuê", "Tạm ngưng", "Khác"]
 
-    # Điền dữ liệu hiện tại vào form
     if self.rental_data:
       self.title_textbox.text = self.rental_data['title']
       self.address_textbox.text = self.rental_data['address']
@@ -25,7 +23,6 @@ class EditRentalForm(EditRentalFormTemplate):
       self.image_file_loader.file = self.rental_data['image']
 
   def save_button_click(self, **event_args):
-    # Lấy dữ liệu từ form
     title = self.title_textbox.text.strip()
     address = self.address_textbox.text.strip()
     price = self.price_textbox.text.strip()
@@ -36,37 +33,33 @@ class EditRentalForm(EditRentalFormTemplate):
     description = self.description_textarea.text.strip()
     image = self.image_file_loader.file or self.rental_data['image']
 
-    # Kiểm tra dữ liệu bắt buộc
     if not all([title, address, price, area, room_type, status, contact]):
-        alert("Vui lòng điền đầy đủ thông tin!")
-        return
+      alert("Vui lòng điền đầy đủ thông tin!")
+      return
 
-        # Chuyển đổi giá và diện tích thành số
-        try:
-          price = float(price.replace(".", ""))
-          area = float(area.replace(".", ""))
-        except ValueError:
-          alert("Giá và diện tích phải là số hợp lệ!")
-          return
-
-      # Cập nhật dữ liệu trong bảng rentals
     try:
-        self.rental_data.update(
-          title=title,
-          address=address,
-          price=price,
-          area=area,
-          room_type=room_type,
-          status=status,
-          contact=contact,
-          description=description or None,
-          image=image
-        )
-        alert("Địa điểm đã được cập nhật thành công!")
-        open_form('MainForm')
+      price = float(price.replace(".", ""))
+      area = float(area.replace(".", ""))
+    except ValueError:
+      alert("Giá và diện tích phải là số hợp lệ!")
+      return
+
+    try:
+      self.rental_data.update(
+        title=title,
+        address=address,
+        price=price,
+        area=area,
+        room_type=room_type,
+        status=status,
+        contact=contact,
+        description=description or None,
+        image=image
+      )
+      alert("Địa điểm đã được cập nhật thành công!")
+      open_form('MainForm')
     except Exception as e:
       alert(f"Lỗi khi cập nhật địa điểm: {str(e)}")
 
   def cancel_button_click(self, **event_args):
-    # Quay lại MainForm
     open_form('MainForm')

@@ -1,74 +1,67 @@
-components: []
-container:
-  properties:
-    html: |-
-      <div class="container">
-        <h2 class="title" anvil-bind="title_label.text"></h2>
-        <div class="image-container">
-          <img id="image-label" anvil-bind="image_label.source" alt="Hình ảnh địa điểm" style="width: 100%; height: 300px; object-fit: cover;">
-        </div>
-        <div class="details">
-          <p><strong>Địa chỉ:</strong> <span id="address-label" anvil-bind="address_label.text"></span></p>
-          <p><strong>Giá:</strong> <span id="price-label" anvil-bind="price_label.text"></span> VND</p>
-          <p><strong>Diện tích:</strong> <span id="area-label" anvil-bind="area_label.text"></span> m²</p>
-          <p><strong>Loại phòng:</strong> <span id="room_type-label" anvil-bind="room_type_label.text"></span></p>
-          <p><strong>Tình trạng:</strong> <span id="status-label" anvil-bind="status_label.text"></span></p>
-          <p><strong>Liên hệ:</strong> <span id="contact-label" anvil-bind="contact_label.text"></span></p>
-          <p><strong>Mô tả:</strong> <span id="description-label" anvil-bind="description_label.text"></span></p>
-        </div>
-        <div class="button-group">
-          <button id="back-button" anvil-on="click:back_button_click" class="btn btn-back">Quay Lại</button>
-        </div>
-      </div>
-
-      <style>
-        .container {
-          max-width: 600px;
-          margin: 20px auto;
-          padding: 20px;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          background-color: #f9f9f9;
-          font-family: Arial, sans-serif;
-        }
-        .title {
-          text-align: center;
-          color: #333;
-          font-size: 24px;
-          font-weight: bold;
-          margin-bottom: 20px;
-        }
-        .image-container {
-          margin-bottom: 20px;
-          border-radius: 4px;
-          overflow: hidden;
-        }
-        .details {
-          margin-bottom: 20px;
-        }
-        .details p {
-          font-size: 16px;
-          color: #555;
-          margin: 10px 0;
-        }
-        .details strong {
-          color: #333;
-        }
-        .button-group {
-          text-align: center;
-        }
-        .btn {
-          padding: 10px 20px;
-          font-size: 16px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          background-color: #B0BEC5;
-          color: white;
-        }
-        .btn:hover {
-          opacity: 0.9;
-        }
-      </style>
-  type: HtmlTemplate
+components:
+- components:
+  - data_bindings:
+    - {code: 'self.item[''title'']', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV EBSBHN,AGTOYI'}
+    name: title_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'self.item[''address'']', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV DQKSMR,BUQMDL'}
+    name: address_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'Giá: " + str(self.item[''price'']) + " VND/tháng', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV JMUPLO,OZAGSK'}
+    name: price_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'Diện tích: " + str(self.item[''area'']) + " m²', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV BFGAJX,PLVACR'}
+    name: area_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'Loại phòng: " + self.item[''room_type'']', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV QIYZRB,SPXGYV'}
+    name: room_type_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'Trạng thái: " + self.item[''status'']', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV DJWVZD,CRZOJM'}
+    name: status_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'Liên hệ: " + self.item[''contact'']', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV ZXWRWQ,YYNYWD'}
+    name: contact_label
+    properties: {}
+    type: Label
+  - data_bindings:
+    - {code: 'Mô tả: " + self.item[''description'']', property: text, writeback: false}
+    layout_properties: {grid_position: 'TJVIXB,DFWNEV RRWFTM,XJVYUV'}
+    name: description_label
+    properties: {}
+    type: Label
+  - layout_properties: {grid_position: 'TJVIXB,DZBZIB PNHSOJ,TEHVRT'}
+    name: image_label
+    properties:
+      height: '300'
+      margin: [null, '200', null, null]
+    type: Image
+  - event_bindings: {click: back_button_click}
+    layout_properties: {grid_position: 'TJVIXB,DZBZIB VGZIPM,VMQBFH'}
+    name: back_button
+    properties: {text: Quay lại}
+    type: Button
+  layout_properties: {grid_position: 'FHOTUY,MURUHC'}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+container: {type: ColumnPanel}
 is_package: true

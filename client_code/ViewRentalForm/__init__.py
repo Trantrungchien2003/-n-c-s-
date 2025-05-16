@@ -11,7 +11,9 @@ from anvil.tables import app_tables
 
 class ViewRentalForm(ViewRentalFormTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
+    # Khởi tạo giao diện
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
+  def back_button_click(self, **event_args):
+    # Quay lại MainForm
+    open_form('MainForm')

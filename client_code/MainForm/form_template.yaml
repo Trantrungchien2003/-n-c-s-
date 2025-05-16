@@ -1,22 +1,23 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'BEHGPY,VUAQKP'}
-    name: welcome_label
-    properties: {align: center, bold: false, font: '', icon: he, text: 'Chào mừng [sẽ cập nhật sau]'}
-    type: Label
-  - layout_properties: {grid_position: 'BEHGPY,DDESYO'}
-    name: profile_button
-    properties: {text: Hồ Sơ}
-    type: Button
   - data_bindings:
     - {code: 'self.item['''']', property: font, writeback: false}
     event_bindings: {click: add_rental_button_click}
-    layout_properties: {grid_position: 'NJLDYJ,FPMBZA'}
+    layout_properties: {grid_position: 'BEHGPY,KYEDRG'}
     name: add_rental_button
     properties: {icon: '', text: ĐĂNG ĐIỂM MỚI, visible: true}
     type: Button
+  - layout_properties: {grid_position: 'BEHGPY,VUAQKP'}
+    name: welcome_label
+    properties: {align: center, bold: false, font: '', icon: '', text: 'Chào mừng [sẽ cập nhật sau]'}
+    type: Label
+  - event_bindings: {click: profile_link_click}
+    layout_properties: {grid_position: 'BEHGPY,DDESYO OWFLDC,VUADWW'}
+    name: profile_link
+    properties: {text: Hồ Sơ}
+    type: Button
   - event_bindings: {click: logout_button_click}
-    layout_properties: {grid_position: 'NJLDYJ,BDRAHX'}
+    layout_properties: {grid_position: 'BEHGPY,DDESYO RUIRYK,BPSBUG'}
     name: logout_button
     properties: {icon: '', italic: false, text: Đăng Xuất}
     type: Button
@@ -32,7 +33,7 @@ components:
     type: Button
   layout_properties: {grid_position: 'TKBYBI,HEJJPQ', row_background: 'theme:Gray 100'}
   name: column_panel_1
-  properties: {col_widths: '{"MAGSFR":50,"ZQGWTI":10,"VUAQKP":55,"DDESYO":5}'}
+  properties: {col_widths: '{"MAGSFR":50,"ZQGWTI":10,"VUAQKP":55,"DDESYO":10,"KYEDRG":15}'}
   type: ColumnPanel
 - layout_properties: {grid_position: 'OTXEFQ,ESHMJH'}
   name: rentals_panel

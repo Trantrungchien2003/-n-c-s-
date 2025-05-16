@@ -46,6 +46,11 @@ components:
     name: column_panel_1
     properties: {}
     type: ColumnPanel
+  - event_bindings: {click: view_link_click}
+    layout_properties: {grid_position: 'CBBLAA,WYLZFT'}
+    name: view_link
+    properties: {}
+    type: Link
   - components:
     - layout_properties: {}
       name: edit_button

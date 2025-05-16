@@ -13,7 +13,7 @@ from datetime import datetime
 @anvil.server.callable
 def get_server_time():
   return datetime.now()
-
+  
 @anvil.server.callable
 def search_rentals(user_email, search_text):
   # Lấy người dùng dựa trên email
@@ -22,12 +22,12 @@ def search_rentals(user_email, search_text):
     raise Exception("Người dùng không tồn tại!")
 
     # Tìm kiếm địa điểm của người dùng
-    rentals = app_tables.rentals.search(posted_by=user)
+  rentals = app_tables.rentals.search(posted_by=user)
   if not search_text:
     return list(rentals)
 
     # Lọc dữ liệu trên server
-    search_text = search_text.lower()
+  search_text = search_text.lower()
   filtered_rentals = [
     rental for rental in rentals
     if (search_text in str(rental['title']).lower() or
@@ -43,9 +43,9 @@ def delete_rental(rental_id, user_email):
     raise Exception("Người dùng không tồn tại!")
 
     # Tìm địa điểm cần xóa
-    rental = app_tables.rentals.get(posted_by=user, id=rental_id)
+  rental = app_tables.rentals.get(posted_by=user, id=rental_id)
   if not rental:
     raise Exception("Địa điểm không tồn tại hoặc bạn không có quyền xóa!")
 
     # Xóa địa điểm
-    rental.delete()
+  rental.delete()
