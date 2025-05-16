@@ -83,7 +83,15 @@ class ItemTemplate1:
     alert(details, title="Chi tiết bài đăng")
 
   def edit_link_click(self, **event_args):
-    # Truyền trực tiếp self.item vào EditRentalForm
+    # Kiểm tra self.item và get_id trước khi mở form
+    try:
+      rental_id = self.item.get_id()
+      if not rental_id:
+        alert("Không tìm thấy ID bài đăng!")
+        return
+    except AttributeError as e:
+      alert(f"Lỗi: Bài đăng không hợp lệ! {str(e)}")
+      return
     open_form('EditRentalForm', rental=self.item)
 
   def delete_link_click(self, **event_args):

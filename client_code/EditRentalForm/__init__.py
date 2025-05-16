@@ -10,9 +10,9 @@ class EditRentalForm(EditRentalFormTemplate):
     self.init_components(**properties)
     self.rental = rental
 
-    # Kiểm tra xem rental có tồn tại và có ID hợp lệ không
-    if not self.rental or not hasattr(self.rental, 'get_id') or not self.rental.get_id():
-      alert("Không tìm thấy bài đăng hoặc bài đăng không hợp lệ!")
+    # Kiểm tra cơ bản xem rental có dữ liệu không
+    if not self.rental or not isinstance(self.rental, dict) or 'title' not in self.rental:
+      alert("Không tìm thấy dữ liệu bài đăng!")
       open_form('MainForm')
       return
 
@@ -53,10 +53,14 @@ class EditRentalForm(EditRentalFormTemplate):
       return
 
     try:
-      # Gọi server để cập nhật bài đăng
+      # Kiểm tra get_id trước khi gọi server
+      rental_id = self.rental.get_id()
+      if not rental_id:
+        alert("Không tìm thấy ID bài đăng để cập nhật!")
+        return
       success = anvil.server.call(
         'update_rental',
-        rental_id=self.rental.get_id(),
+        rental_id=rental_id,
         title=title,
         address=address,
         price=price,
@@ -72,6 +76,8 @@ class EditRentalForm(EditRentalFormTemplate):
         open_form('MainForm')
       else:
         alert("Không thể cập nhật bài đăng!")
+    except AttributeError as e:
+      alert(f"Lỗi: Bài đăng không hợp lệ! {str(e)}")
     except Exception as e:
       alert(f"Lỗi khi cập nhật bài đăng: {str(e)}")
 
