@@ -4,37 +4,25 @@ components:
     name: title_label
     properties: {align: center, bold: true, text: HỒ SƠ NGƯỜI DÙNG}
     type: Label
-  - data_bindings:
-    - {code: 'self.current_user[''email'']', property: text, writeback: false}
+  - data_bindings: []
     layout_properties: {grid_position: 'UFLRJN,SUTCRV'}
     name: email_label
     properties: {text: 'Email:'}
     type: Label
   - layout_properties: {grid_position: 'UFLRJN,IXOAMM'}
     name: phone_label
-    properties: {}
+    properties: {text: Số điện thoại}
     type: Label
-  - data_bindings: []
-    layout_properties: {grid_position: 'UFLRJN,HFMOVN'}
-    name: phone_textbox
-    properties: {placeholder: Nhập số điện thoại}
-    type: TextBox
-  - data_bindings: []
-    layout_properties: {grid_position: 'WLJPIM,TUSFDF'}
-    name: password_textbox
-    properties: {placeholder: Nhập mật khẩu mới (để trống nếu không đổi)}
-    type: TextBox
-  - event_bindings: {}
-    layout_properties: {grid_position: 'SPAMKS,GRJKJB'}
-    name: save_button
-    properties: {text: Lưu}
-    type: Button
+  - layout_properties: {grid_position: 'UFLRJN,SNDLJY'}
+    name: role_label
+    properties: {text: Vai trò}
+    type: Label
   - event_bindings: {click: back_button_click}
     layout_properties: {grid_position: 'SPAMKS,WZLFXU'}
     name: back_button
     properties: {text: Quay lại}
     type: Button
-  layout_properties: {grid_position: 'JYRFJE,LZEUHM'}
+  layout_properties: {grid_position: 'JYRFJE,ORDTVK'}
   name: column_panel_1
   properties: {}
   type: ColumnPanel
