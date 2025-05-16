@@ -13,8 +13,8 @@ components:
     properties: {text: Duyệt bài}
     type: Button
   - layout_properties: {grid_position: 'BEHGPY,VUAQKP'}
-    name: welcome_label
-    properties: {align: center, bold: false, font: '', icon: '', text: 'Chào mừng [sẽ cập nhật sau]'}
+    name: title_label
+    properties: {align: center, bold: false, font: '', icon: '', text: Quản lý địa điểm}
     type: Label
   - event_bindings: {click: profile_link_click}
     layout_properties: {grid_position: 'BEHGPY,DDESYO OWFLDC,VUADWW'}

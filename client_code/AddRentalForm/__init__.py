@@ -14,7 +14,7 @@ class AddRentalForm(AddRentalFormTemplate):
     title = self.title_textbox.text.strip()
     address = self.address_textbox.text.strip()
     price = self.price_textbox.text.strip()
-    description = getattr(self, 'description_textbox', None).text.strip() if hasattr(self, 'description_textbox') else ""
+    description = self.description_textbox.text.strip()
     room_type = self.room_type_dropdown.selected_value
     area = self.area_textbox.text.strip()
     status = self.status_dropdown.selected_value
@@ -41,7 +41,7 @@ class AddRentalForm(AddRentalFormTemplate):
       "description": description,
       "room_type": room_type,
       "area": area,
-      "status": "Pending",  # Mặc định là Pending, admin sẽ duyệt
+      "status": "Pending",
       "contact": contact,
       "user": anvil.users.get_user()['email']
     }

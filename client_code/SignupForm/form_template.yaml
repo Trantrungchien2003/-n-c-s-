@@ -5,21 +5,21 @@ components:
     properties: {align: center, bold: true, font: 'Time ', font_size: 32, role: headline, text: Đăng Ký}
     type: Label
   - layout_properties: {grid_position: 'YSKNRQ,YPRNXT'}
-    name: label_1
+    name: email_label
     properties: {text: 'Email:'}
     type: Label
   - layout_properties: {grid_position: 'YSKNRQ,AIAUXQ'}
     name: email_textbox
-    properties: {align: left, text: ''}
+    properties: {align: left, placeholder: Email, text: ''}
     type: TextBox
   - layout_properties: {grid_position: 'IRZULA,JVNTJX'}
-    name: label_2
+    name: password_label
     properties: {text: Mật Khẩu}
     type: Label
   - data_bindings: []
     layout_properties: {grid_position: 'IRZULA,GJHALG'}
     name: password_textbox
-    properties: {bold: false, italic: false, text: '', type: text, visible: true}
+    properties: {bold: false, italic: false, placeholder: Nhập mật  khẩu, text: '', type: text, visible: true}
     type: TextBox
   - layout_properties: {grid_position: 'TRBEHK,CSIHMG'}
     name: label_3
@@ -29,14 +29,32 @@ components:
     name: confirm_password_textbox
     properties: {text: '', visible: true}
     type: TextBox
-  - event_bindings: {click: signup_button_click}
+  - layout_properties: {grid_position: 'LRPURX,FAAADT'}
+    name: role_label
+    properties: {text: Vai trò}
+    type: Label
+  - data_bindings:
+    - {code: 'self.item[''user", "admin'']', property: items, writeback: false}
+    layout_properties: {grid_position: 'LRPURX,DCDFJD'}
+    name: role_dropdown
+    properties: {}
+    type: DropDown
+  - layout_properties: {grid_position: 'UDSRHI,DJGAEZ'}
+    name: phone_label
+    properties: {text: Số điện thoại}
+    type: Label
+  - layout_properties: {grid_position: 'UDSRHI,SGHWQT'}
+    name: phone_textbox
+    properties: {placeholder: Nhập số điện thoại}
+    type: TextBox
+  - event_bindings: {}
     layout_properties: {grid_position: 'YHBXKW,SCCIGI'}
-    name: signup_button
+    name: submit_button
     properties: {background: '', font_size: 14, foreground: '', role: raised, text: Đăng Ký}
     type: Button
-  - event_bindings: {click: login_link_click}
+  - event_bindings: {click: back_button_click}
     layout_properties: {grid_position: 'FFWRSS,ORZRXL'}
-    name: login_link
+    name: back_button
     properties: {text: 'Đã có tài khoản? Đăng nhập'}
     type: Link
   layout_properties: {grid_position: 'DPTUPM,JGIOEH'}
