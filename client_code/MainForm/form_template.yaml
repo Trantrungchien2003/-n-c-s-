@@ -3,9 +3,14 @@ components:
   - data_bindings:
     - {code: 'self.item['''']', property: font, writeback: false}
     event_bindings: {click: add_rental_button_click}
-    layout_properties: {grid_position: 'BEHGPY,KYEDRG'}
+    layout_properties: {grid_position: 'BEHGPY,KYEDRG SCYSQT,DBYOWL'}
     name: add_rental_button
     properties: {icon: '', text: ĐĂNG ĐIỂM MỚI, visible: true}
+    type: Button
+  - event_bindings: {click: approve_button_click}
+    layout_properties: {grid_position: 'BEHGPY,KYEDRG JOAOCP,TWAPKA'}
+    name: approve_button
+    properties: {text: Duyệt bài}
     type: Button
   - layout_properties: {grid_position: 'BEHGPY,VUAQKP'}
     name: welcome_label
