@@ -71,13 +71,13 @@ def update_rental(rental_id, title, address, price, room_type, area, status, ima
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
     raise Exception("Không tìm thấy bài đăng trong bảng dữ liệu!")
-  # user = anvil.users.get_user()
-  # user_record = app_tables.users.get(email=user['email'])
-  # is_admin = user_record['role'] == 'admin'
-  # is_owner = rental['user'] == user['email']
-  # is_approved = rental['status'] == "Approved"
-  # if not (is_admin or is_owner or is_approved):
-  #   raise Exception("Bạn không có quyền chỉnh sửa bài đăng này!")
+  user = anvil.users.get_user()
+  user_record = app_tables.users.get(email=user['email'])
+  is_admin = user_record['role'] == 'admin'
+  is_owner = rental['user'] == user['email']
+  is_approved = rental['status'] == "Approved"
+  if not (is_admin or is_owner or is_approved):
+    raise Exception("Bạn không có quyền chỉnh sửa bài đăng này!")
   rental.update(
     title=title,
     address=address,

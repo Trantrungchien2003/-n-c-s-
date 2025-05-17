@@ -1,5 +1,10 @@
 allow_embedding: false
 db_schema:
+  chunhatro:
+    client: none
+    columns: []
+    server: full
+    title: Chunhatro
   files:
     client: none
     columns:
@@ -14,6 +19,16 @@ db_schema:
       type: string
     server: full
     title: Files
+  nhatro:
+    client: none
+    columns: []
+    server: full
+    title: Nhatro
+  phongtro:
+    client: none
+    columns: []
+    server: full
+    title: Phongtro
   rentals:
     client: full
     columns:
@@ -80,9 +95,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: role
       type: string
-    - admin_ui: {width: 200}
-      name: mfa
-      type: simpleObject
+    - admin_ui: {order: 11, width: 200}
+      name: phone
+      type: string
     server: full
     title: Users
 name: UserAuthApp
