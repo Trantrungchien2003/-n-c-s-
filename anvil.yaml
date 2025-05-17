@@ -3,15 +3,16 @@ db_schema:
   chunhatro:
     client: full
     columns:
-    - admin_ui: {order: 0, width: 200}
-      name: Machunha
-      type: string
     - admin_ui: {order: 1, width: 200}
       name: Hoten
       type: string
     - admin_ui: {order: 2, width: 200}
       name: Sodienthoai
       type: string
+    - admin_ui: {order: 0, width: 200}
+      name: Machunha
+      target: chunhatro
+      type: link_single
     server: full
     title: Chunhatro
   files:
@@ -30,7 +31,16 @@ db_schema:
     title: Files
   nhatro:
     client: none
-    columns: []
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Manhatro
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: Tennhatro
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: Diachi
+      type: string
     server: full
     title: Nhatro
   phongtro:
