@@ -1,8 +1,17 @@
 allow_embedding: false
 db_schema:
   chunhatro:
-    client: none
-    columns: []
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Machunha
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: Hoten
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: Sodienthoai
+      type: string
     server: full
     title: Chunhatro
   files:
