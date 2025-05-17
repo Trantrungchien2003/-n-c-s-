@@ -34,7 +34,7 @@ components:
       margin: ['2', null, '2', null]
     type: TextBox
   - layout_properties: {grid_position: 'DLZSTJ,YNSCMB TZVGJV,LOUFHE'}
-    name: description_textarea
+    name: description_textbox
     properties: {height: 47.199981689453125}
     type: TextArea
   - layout_properties: {grid_position: 'DLZSTJ,YNSCMB BECXGP,UZWZKW'}

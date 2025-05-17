@@ -67,20 +67,27 @@ def reject_rental(rental_id):
   return f"Bài đăng '{rental['title']}' đã bị từ chối."
 
 @anvil.server.callable
-def update_rental(rental_id, title, address, price, description, room_type, area, status, contact, image):
+def update_rental(rental_id, title, address, price, room_type, area, status, image, description, contact):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
-    raise Exception("Không tìm thấy bài đăng!")
+    raise Exception("Không tìm thấy bài đăng trong bảng dữ liệu!")
+  # user = anvil.users.get_user()
+  # user_record = app_tables.users.get(email=user['email'])
+  # is_admin = user_record['role'] == 'admin'
+  # is_owner = rental['user'] == user['email']
+  # is_approved = rental['status'] == "Approved"
+  # if not (is_admin or is_owner or is_approved):
+  #   raise Exception("Bạn không có quyền chỉnh sửa bài đăng này!")
   rental.update(
     title=title,
     address=address,
     price=price,
-    description=description,
     room_type=room_type,
     area=area,
     status=status,
-    contact=contact,
-    image=image
+    image=image,
+    description=description,
+    contact=contact
   )
   return True
 
@@ -91,3 +98,18 @@ def delete_rental(rental_id):
     raise Exception("Không tìm thấy bài đăng!")
   rental.delete()
   return True
+@anvil.server.callable
+def check_rental_ids():
+  rentals = app_tables.rentals.search()
+  for rental in rentals:
+    print(f"ID của bài đăng: {rental.get_id()}")
+  return True
+
+@anvil.server.callable
+def get_rental_by_id(rental_id):
+  print(f"Debug: rental_id in get_rental_by_id = {rental_id}")  # Debug
+  rental = app_tables.rentals.get_by_id(rental_id)
+  if not rental:
+    print(f"Debug: No rental found for rental_id = {rental_id}")  # Debug
+    return None
+  return rental

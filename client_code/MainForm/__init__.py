@@ -83,8 +83,23 @@ class ItemTemplate1:
     alert(details, title="Chi tiết bài đăng")
 
   def edit_link_click(self, **event_args):
-    # Truyền trực tiếp self.item vào EditRentalForm
-    open_form('EditRentalForm', rental=self.item)
+    print(f"Debug: self.item in edit_link_click = {self.item}")  # Debug
+    if not self.item or not hasattr(self.item, 'get_id'):
+      alert("Dữ liệu bài đăng không hợp lệ! Vui lòng làm mới danh sách.")
+      self.parent.raise_event('x-refresh')
+      return
+    rental_id = self.item.get_id()
+    try:
+      rental = anvil.server.call('get_rental_by_id', rental_id)
+      print(f"Debug: rental from server in edit_link_click = {rental}")  # Debug
+      if not rental:
+        alert("Không tìm thấy bài đăng! Vui lòng làm mới danh sách.")
+        self.parent.raise_event('x-refresh')
+        return
+      open_form('EditRentalForm', rental=rental)
+    except Exception as e:
+      alert(f"Lỗi khi lấy dữ liệu bài đăng: {str(e)}")
+      self.parent.raise_event('x-refresh')
 
   def delete_link_click(self, **event_args):
     if confirm("Bạn có chắc chắn muốn xóa bài đăng này?"):

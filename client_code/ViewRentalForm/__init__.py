@@ -1,11 +1,20 @@
 from ._anvil_designer import ViewRentalFormTemplate
 from anvil import *
+import anvil.server
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 
 class ViewRentalForm(ViewRentalFormTemplate):
   def __init__(self, item=None, **properties):
     self.init_components(**properties)
+    print(f"Debug: item in ViewRentalForm = {item}")  # Debug
     if item:
       self.item = item
+      print(f"Debug: self.item in ViewRentalForm = {self.item}")  # Debug
       self.title_label.text = self.item['title']
       self.address_label.text = f"Địa chỉ: {self.item['address']}"
       self.price_label.text = f"Giá: {self.item['price']} VND/tháng"
@@ -16,6 +25,8 @@ class ViewRentalForm(ViewRentalFormTemplate):
       self.description_label.text = f"Mô tả: {self.item['description']}" if 'description' in self.item else "Không có mô tả"
       if self.item['image']:
         self.image_label.source = self.item['image']
+    else:
+      print("Debug: item is None in ViewRentalForm")  # Debug
 
   def back_button_click(self, **event_args):
     open_form('MainForm')

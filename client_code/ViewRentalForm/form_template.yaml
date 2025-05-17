@@ -43,7 +43,7 @@ components:
   - layout_properties: {grid_position: 'TJVIXB,DZBZIB PNHSOJ,TEHVRT'}
     name: image_label
     properties:
-      height: '300'
+      height: 264.79998779296875
       margin: [null, '200', null, null]
     type: Image
   - event_bindings: {click: back_button_click}
