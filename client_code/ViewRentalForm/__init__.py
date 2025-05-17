@@ -22,7 +22,7 @@ class ViewRentalForm(ViewRentalFormTemplate):
       self.room_type_label.text = f"Loại phòng: {self.item['room_type']}"
       self.status_label.text = f"Trạng thái: {self.item['status']}"
       self.contact_label.text = f"Liên hệ: {self.item['contact']}"
-      self.description_label.text = f"Mô tả: {self.item['description']}" if 'description' in self.item else "Không có mô tả"
+      self.description_label.text = f"Mô tả: {self.item['description']}"
       if self.item['image']:
         self.image_label.source = self.item['image']
     else:

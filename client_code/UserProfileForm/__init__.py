@@ -25,8 +25,8 @@ class UserProfileForm(UserProfileFormTemplate):
     # Lấy thông tin bổ sung từ bảng users
     user_record = app_tables.users.get(email=self.current_user['email'])
     if user_record:
-      self.phone_label.text = user_record['phone'] if 'phone' in user_record else "Chưa cập nhật"
-      self.role_label.text = user_record['role'] if 'role' in user_record else "Chưa xác định"
+      self.phone_label.text = user_record['phone'] 
+      self.role_label.text = user_record['role']
 
   def back_button_click(self, **event_args):
     open_form('MainForm')

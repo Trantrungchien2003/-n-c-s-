@@ -1,44 +1,49 @@
 components:
 - components:
-  - data_bindings:
-    - {code: 'self.item['''']', property: font, writeback: false}
-    event_bindings: {click: add_rental_button_click}
-    layout_properties: {grid_position: 'BEHGPY,KYEDRG'}
-    name: add_rental_button
-    properties: {icon: '', text: ĐĂNG ĐIỂM MỚI, visible: true}
-    type: Button
-  - layout_properties: {grid_position: 'BEHGPY,VUAQKP'}
-    name: title_label
-    properties: {align: center, bold: false, font: '', icon: '', text: Quản lý địa điểm}
-    type: Label
-  - event_bindings: {click: profile_link_click}
-    layout_properties: {grid_position: 'BEHGPY,DDESYO OWFLDC,VUADWW'}
-    name: profile_link
-    properties: {text: Hồ Sơ}
-    type: Button
-  - event_bindings: {click: approve_button_click}
-    layout_properties: {grid_position: 'BEHGPY,DDESYO ZRSWAE,CXWIVO'}
-    name: approve_button
-    properties: {text: Duyệt bài}
-    type: Button
-  - event_bindings: {click: logout_button_click}
-    layout_properties: {grid_position: 'BEHGPY,DDESYO RUIRYK,BPSBUG'}
-    name: logout_button
-    properties: {icon: '', italic: false, text: Đăng Xuất}
-    type: Button
-  - event_bindings: {}
-    layout_properties: {grid_position: 'PMPCYZ,MAGSFR'}
-    name: search_box
-    properties: {placeholder: Tìm kiếm theo tiêu đề hoặc địa chỉ..., text: ''}
-    type: TextBox
-  - event_bindings: {click: search_button_click}
-    layout_properties: {grid_position: 'PMPCYZ,ZQGWTI'}
-    name: search_button
-    properties: {background: '#2196F3', bold: true, foreground: '#FFFFFF', text: Tìm kiếm}
-    type: Button
+  - components:
+    - data_bindings:
+      - {code: 'self.item['''']', property: font, writeback: false}
+      event_bindings: {click: add_rental_button_click}
+      layout_properties: {grid_position: 'HVLFWJ,AHMFHH NFBAXM,DVXCQJ'}
+      name: add_rental_button
+      properties: {icon: '', text: ĐĂNG ĐIỂM MỚI, visible: true}
+      type: Button
+    - event_bindings: {click: approve_button_click}
+      layout_properties: {grid_position: 'HVLFWJ,AHMFHH PSUFCK,YZOWFB'}
+      name: approve_button
+      properties: {text: Duyệt bài}
+      type: Button
+    - layout_properties: {grid_position: 'HVLFWJ,SGYFRN'}
+      name: title_label
+      properties: {align: center, bold: true, font: '', font_size: 24, icon: 'fa:address-card-o', text: Quản lý địa điểm}
+      type: Label
+    - event_bindings: {click: profile_link_click}
+      layout_properties: {grid_position: 'HVLFWJ,ONFONK ALLESC,GKAMDF'}
+      name: profile_link
+      properties: {text: Hồ Sơ}
+      type: Button
+    - event_bindings: {click: logout_button_click}
+      layout_properties: {grid_position: 'HVLFWJ,ONFONK YMMTDP,PJHYWB'}
+      name: logout_button
+      properties: {icon: '', italic: false, text: Đăng Xuất}
+      type: Button
+    - event_bindings: {}
+      layout_properties: {grid_position: 'SPTOFJ,COYYIP'}
+      name: search_box
+      properties: {placeholder: Tìm kiếm theo tiêu đề hoặc địa chỉ..., text: ''}
+      type: TextBox
+    - event_bindings: {click: search_button_click}
+      layout_properties: {grid_position: 'SPTOFJ,HSYOAY'}
+      name: search_button
+      properties: {background: '#2196F3', bold: true, foreground: '#FFFFFF', text: Tìm kiếm}
+      type: Button
+    layout_properties: {grid_position: 'THHWTG,STLTBU'}
+    name: card_1
+    properties: {col_widths: '{"COYYIP":40,"HSYOAY":20,"AHMFHH":15,"SGYFRN":30,"ONFONK":15}', role: card}
+    type: ColumnPanel
   layout_properties: {grid_position: 'TKBYBI,HEJJPQ', row_background: 'theme:Gray 100'}
   name: column_panel_1
-  properties: {col_widths: '{"MAGSFR":50,"ZQGWTI":10,"VUAQKP":55,"DDESYO":10,"KYEDRG":15}'}
+  properties: {col_widths: '{}'}
   type: ColumnPanel
 - layout_properties: {grid_position: 'OTXEFQ,ESHMJH'}
   name: rentals_panel

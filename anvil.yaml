@@ -3,28 +3,27 @@ db_schema:
   chunhatro:
     client: full
     columns:
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: Hoten
       type: string
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: Sodienthoai
       type: string
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: Machunha
-      target: chunhatro
-      type: link_single
+      type: string
     server: full
     title: Chunhatro
   files:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: name
       type: string
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: content_type
       type: string
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: data
       type: string
     server: full
@@ -32,20 +31,49 @@ db_schema:
   nhatro:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: Manhatro
       type: string
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: Tennhatro
       type: string
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: Diachi
       type: string
+    - admin_ui: {width: 200}
+      name: Machunha
+      target: chunhatro
+      type: link_multiple
+    - admin_ui: {order: 4, width: 200}
+      name: Capnhatlancuoi
+      type: datetime
     server: full
     title: Nhatro
   phongtro:
     client: none
-    columns: []
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Maphong
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: Manhatro
+      target: nhatro
+      type: link_multiple
+    - admin_ui: {order: 2, width: 200}
+      name: Loaiphong
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: Giathue
+      type: string
+    - admin_ui: {order: 4, width: 200}
+      name: Dientich
+      type: number
+    - admin_ui: {order: 5, width: 200}
+      name: Trangthai
+      type: string
+    - admin_ui: {order: 6, width: 200}
+      name: Mota
+      type: string
     server: full
     title: Phongtro
   rentals:
@@ -76,13 +104,13 @@ db_schema:
       name: posted_by
       target: users
       type: link_single
-    - admin_ui: {order: 11, width: 200}
+    - admin_ui: {width: 200}
       name: description
       type: string
-    - admin_ui: {order: 12, width: 200}
+    - admin_ui: {width: 200}
       name: contact
       type: string
-    - admin_ui: {order: 13, width: 200}
+    - admin_ui: {width: 200}
       name: image
       type: media
     server: full
@@ -114,7 +142,7 @@ db_schema:
     - admin_ui: {width: 200}
       name: role
       type: string
-    - admin_ui: {order: 11, width: 200}
+    - admin_ui: {width: 200}
       name: phone
       type: string
     server: full

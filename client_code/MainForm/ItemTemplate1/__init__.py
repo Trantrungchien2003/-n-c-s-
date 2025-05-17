@@ -1,5 +1,6 @@
 from ._anvil_designer import ItemTemplate1Template
 from anvil import *
+import plotly.graph_objects as go
 import anvil.server
 import anvil.users
 from anvil.tables import app_tables
