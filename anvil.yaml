@@ -1,19 +1,5 @@
 allow_embedding: false
 db_schema:
-  chunhatro:
-    client: full
-    columns:
-    - admin_ui: {width: 200}
-      name: Hoten
-      type: string
-    - admin_ui: {width: 200}
-      name: Sodienthoai
-      type: string
-    - admin_ui: {width: 200}
-      name: Machunha
-      type: string
-    server: full
-    title: Chunhatro
   files:
     client: none
     columns:
@@ -28,54 +14,6 @@ db_schema:
       type: string
     server: full
     title: Files
-  nhatro:
-    client: none
-    columns:
-    - admin_ui: {width: 200}
-      name: Manhatro
-      type: string
-    - admin_ui: {width: 200}
-      name: Tennhatro
-      type: string
-    - admin_ui: {width: 200}
-      name: Diachi
-      type: string
-    - admin_ui: {width: 200}
-      name: Machunha
-      target: chunhatro
-      type: link_multiple
-    - admin_ui: {order: 4, width: 200}
-      name: Capnhatlancuoi
-      type: datetime
-    server: full
-    title: Nhatro
-  phongtro:
-    client: none
-    columns:
-    - admin_ui: {order: 0, width: 200}
-      name: Maphong
-      type: string
-    - admin_ui: {order: 1, width: 200}
-      name: Manhatro
-      target: nhatro
-      type: link_multiple
-    - admin_ui: {order: 2, width: 200}
-      name: Loaiphong
-      type: string
-    - admin_ui: {order: 3, width: 200}
-      name: Giathue
-      type: string
-    - admin_ui: {order: 4, width: 200}
-      name: Dientich
-      type: number
-    - admin_ui: {order: 5, width: 200}
-      name: Trangthai
-      type: string
-    - admin_ui: {order: 6, width: 200}
-      name: Mota
-      type: string
-    server: full
-    title: Phongtro
   rentals:
     client: full
     columns:
@@ -143,14 +81,17 @@ db_schema:
       name: role
       type: string
     - admin_ui: {width: 200}
-      name: phone
-      type: string
-    - admin_ui: {order: 9, width: 200}
       name: mfa
       type: simpleObject
-    - admin_ui: {order: 10, width: 200}
+    - admin_ui: {width: 200}
       name: remembered_logins
       type: simpleObject
+    - admin_ui: {width: 200}
+      name: email_confirmation_key
+      type: string
+    - admin_ui: {width: 200}
+      name: phone
+      type: string
     server: full
     title: Users
 name: UserAuthApp
@@ -166,7 +107,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_remember_me: true, allow_signup: true, confirm_email: true, enable_automatically: true, mfa_timeout_days: 0, remember_me_days: 30, require_mfa: false, require_secure_passwords: true, use_email: true, use_google: false}
+- client_config: {allow_remember_me: false, allow_signup: true, confirm_email: false, enable_automatically: true, mfa_timeout_days: 0, remember_me_days: 30, require_mfa: false, require_secure_passwords: true, use_email: true, use_google: false}
   server_config: {user_table: users}
   source: /runtime/services/anvil/users.yml
 - client_config: {}
