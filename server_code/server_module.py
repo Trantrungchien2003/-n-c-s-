@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 
-@anvil.server.callable
+@anvil.server.callable #quản lý người dùng
 def add_user(email, password, role, phone):
   try:
     app_tables.users.add_row(
@@ -23,7 +23,7 @@ def add_user(email, password, role, phone):
   except Exception as e:
     raise Exception(f"Không thể thêm người dùng: {str(e)}")
 
-@anvil.server.callable
+@anvil.server.callable #thêm bài đăng
 def add_rental(title, address, price, description, room_type, area, status, contact, user, image=None):
   try:
     data = {
@@ -44,7 +44,7 @@ def add_rental(title, address, price, description, room_type, area, status, cont
   except Exception as e:
     raise Exception(f"Không thể thêm bài đăng: {str(e)}")
 
-@anvil.server.callable
+@anvil.server.callable #duyệt bài đăng
 def approve_rental(rental_id):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
@@ -55,7 +55,7 @@ def approve_rental(rental_id):
   rental.update(status="Approved")
   return f"Bài đăng '{rental['title']}' đã được duyệt!"
 
-@anvil.server.callable
+@anvil.server.callable #từ chối bài đăng
 def reject_rental(rental_id):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
@@ -66,7 +66,7 @@ def reject_rental(rental_id):
   rental.update(status="Rejected")
   return f"Bài đăng '{rental['title']}' đã bị từ chối."
 
-@anvil.server.callable
+@anvil.server.callable #cập nhật bài đăng
 def update_rental(rental_id, title, address, price, room_type, area, status, image, description, contact):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
@@ -91,7 +91,7 @@ def update_rental(rental_id, title, address, price, room_type, area, status, ima
   )
   return True
 
-@anvil.server.callable
+@anvil.server.callable #xóa bài đăng
 def delete_rental(rental_id):
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
@@ -105,9 +105,9 @@ def check_rental_ids():
     print(f"ID của bài đăng: {rental.get_id()}")
   return True
 
-@anvil.server.callable
+@anvil.server.callable #check id bài đăng
 def get_rental_by_id(rental_id):
-  print(f"Debug: rental_id in get_rental_by_id = {rental_id}")  # Debug
+  print(f"Debug: rental_id in get_rental_by_id = {rental_id}")  # Debug 
   rental = app_tables.rentals.get_by_id(rental_id)
   if not rental:
     print(f"Debug: No rental found for rental_id = {rental_id}")  # Debug
