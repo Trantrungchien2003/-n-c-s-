@@ -1,46 +1,46 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'VTSXCM,HLVBXS'}
+  - layout_properties: {grid_position: 'ZGRSVL,EUOCYI VTSXCM,HLVBXS'}
     name: headline_1
     properties: {align: center, background: '', bold: true, font: 'time ', font_size: 32, icon: '', italic: false, role: headline, text: Đăng Nhập}
     type: Label
-  - layout_properties: {grid_position: 'PDJJEL,YZITXD'}
+  - layout_properties: {grid_position: 'ZGRSVL,EUOCYI PDJJEL,YZITXD'}
     name: label_1
     properties: {align: left, bold: false, text: 'Email:'}
     type: Label
-  - layout_properties: {grid_position: 'PDJJEL,SQBZIY'}
+  - layout_properties: {grid_position: 'ZGRSVL,EUOCYI PDJJEL,SQBZIY'}
     name: email_textbox
     properties: {placeholder: Nhập email, text: ''}
     type: TextBox
   - data_bindings: []
-    layout_properties: {grid_position: 'IZQRWK,XLBGEL'}
+    layout_properties: {grid_position: 'ZGRSVL,EUOCYI IZQRWK,XLBGEL'}
     name: label_2
     properties: {align: left, bold: false, text: 'Mật Khẩu:'}
     type: Label
   - event_bindings: {}
-    layout_properties: {grid_position: 'IZQRWK,FDLXFQ'}
+    layout_properties: {grid_position: 'ZGRSVL,EUOCYI IZQRWK,FDLXFQ'}
     name: password_textbox
     properties: {placeholder: Nhập mật khẩu, text: ''}
     type: TextBox
   - data_bindings: []
-    layout_properties: {grid_position: 'IZQRWK,HCSNBB'}
+    layout_properties: {grid_position: 'ZGRSVL,EUOCYI IZQRWK,HCSNBB'}
     name: remember_me_checkbox
     properties: {checked: false, text: Ghi nhớ đăng nhập}
     type: CheckBox
   - event_bindings: {click: login_button_click}
-    layout_properties: {grid_position: 'VWPFZQ,BJOIGM', row_background: ''}
+    layout_properties: {grid_position: 'ZGRSVL,EUOCYI VWPFZQ,BJOIGM', row_background: ''}
     name: login_button
     properties: {background: '', bold: false, font_size: 14, foreground: '', icon: '', italic: false, role: raised, text: Đăng nhập, underline: false}
     type: Button
   - event_bindings: {click: signup_link_click}
-    layout_properties: {grid_position: 'QGKKAH,TLKGKT'}
+    layout_properties: {grid_position: 'ZGRSVL,EUOCYI QGKKAH,TLKGKT'}
     name: signup_link
     properties: {text: 'Chưa có tài khoản? Đăng ký'}
     type: Link
   layout_properties: {grid_position: 'PMMZLZ,FBZHWJ'}
   name: card_1
   properties:
-    col_widths: '{"YZITXD":15,"SQBZIY":45,"XLBGEL":20,"FDLXFQ":45,"BJOIGM":45,"HCSNBB":15}'
+    col_widths: '{"YZITXD":15,"SQBZIY":45,"XLBGEL":20,"FDLXFQ":45,"BJOIGM":45,"HCSNBB":15,"EUOCYI":55,"NJKEPV":5}'
     role: card
     spacing:
       padding: [null, '6', null, '6']
